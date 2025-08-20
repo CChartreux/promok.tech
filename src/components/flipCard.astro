@@ -1,0 +1,19 @@
+---
+const { title, description, color, image, aspect = "" } = Astro.props;
+---
+
+<div style={`--color: ${color}`}>
+  <div class="flip-card_front">
+    <img class={`flip-card ${aspect}`} src={image} alt="">
+  </div>
+
+  <div class="flip-card_back flex items-center justify-center text-white p-4">
+  </div>
+</div>
+
+<style>
+  .flip-card {
+    background: var(--color);
+    border-radius: 0.5rem;
+  }
+</style>
