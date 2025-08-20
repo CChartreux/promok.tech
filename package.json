@@ -10,5 +10,6 @@
   },
   "dependencies": {
     "astro": "^5.13.2"
-  }
+  },  
+  "build:gh-page": "astro check && astro build --base=/your-project-name/"
 }
