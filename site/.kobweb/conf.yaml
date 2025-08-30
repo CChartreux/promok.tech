@@ -1,0 +1,14 @@
+site:
+  title: "Promok Tech"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/tech.js"
+      api: "build/libs/tech.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/tech.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
