@@ -18,12 +18,8 @@ fun BottomApps() {
         contentAlignment = Alignment.BottomCenter,
     ) {
         Row {
-            AppIcon("favicon.ico")
-            AppIcon("favicon.ico")
-            AppIcon("favicon.ico")
-            AppIcon("favicon.ico")
-            AppIcon("favicon.ico")
-            AppIcon("favicon.ico")
+            AppIcon("profile.ico", 0)
+            AppIcon("settings.ico", 0)
         }
     }
 }
