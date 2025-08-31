@@ -1,12 +1,7 @@
 package com.promok.tech.pages
 
 import androidx.compose.runtime.*
-import com.promok.tech.components.BottomApps
-import com.promok.tech.components.LockScreenContent
-import com.promok.tech.components.ScrollUnlockAnimation
-import com.promok.tech.components.UnlockMessage
-import com.promok.tech.components.unlockKeyframes
-import com.varabyte.kobweb.compose.css.functions.Gradient
+import com.promok.tech.components.*
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -38,7 +33,7 @@ fun HomePage() {
                     .backgroundImage(url("background_image_homescreen.png")).color(Color.white).fontFamily("Doto"),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                BottomApps()
+                Apps()
             }
         } else {
             // Locked state with scroll animation
