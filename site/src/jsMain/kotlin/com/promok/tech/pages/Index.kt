@@ -24,13 +24,13 @@ fun HomePage() {
         modifier = Modifier
             .fillMaxSize()
             .backgroundColor(Color.black)
-            .backgroundImage(url("background_image_homescreen.png"))
+            .backgroundImage(url("background_image_homescreen.webp"))
     ) {
         if (unlocked) {
             // Unlocked state content
             Column(
                 modifier = Modifier.fillMaxSize().backgroundColor(Color.black)
-                    .backgroundImage(url("background_image_homescreen.png")).color(Color.white).fontFamily("Doto"),
+                    .backgroundImage(url("background_image_homescreen.webp")).color(Color.white).fontFamily("Doto"),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Desktop()
@@ -40,7 +40,8 @@ fun HomePage() {
             ScrollUnlockAnimation(onUnlock = { unlocked = true }) { playAnimation ->
                 Column(
                     modifier = Modifier
-                        .fillMaxSize().backgroundColor(Color.black).backgroundImage(url("background_image_lockscreen.png"))
+                        .fillMaxSize().backgroundColor(Color.black)
+                        .backgroundImage(url("background_image_lockscreen.webp"))
                         .color(Color.white).fontFamily("Doto")
                         .then(
                             if (playAnimation) Modifier.animation(
