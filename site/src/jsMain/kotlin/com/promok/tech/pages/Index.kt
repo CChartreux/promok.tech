@@ -33,7 +33,7 @@ fun HomePage() {
                     .backgroundImage(url("background_image_homescreen.png")).color(Color.white).fontFamily("Doto"),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Apps()
+                Desktop()
             }
         } else {
             // Locked state with scroll animation

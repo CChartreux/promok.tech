@@ -14,9 +14,8 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
 
 @Composable
-fun AppIcon(desktopApp: DesktopApp) {
+fun DesktopAppIcon(desktopApp: DesktopApp) {
     var hovered by remember { mutableStateOf(false) }
-    var opened by remember { mutableStateOf(0) }
 
     val appIconSize = 58.px
 
@@ -32,7 +31,7 @@ fun AppIcon(desktopApp: DesktopApp) {
                 .onMouseEnter { hovered = true }
                 .onMouseLeave { hovered = false }
 
-                .onMouseDown { opened++ }
+                .onMouseDown { desktopApp.opened.value++ }
 
 
         ) {
@@ -64,7 +63,7 @@ fun AppIcon(desktopApp: DesktopApp) {
 
         }
 
-        AppIconCircle(opened)
+        AppIconCircle(desktopApp.opened.value)
     }
 }
 

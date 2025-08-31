@@ -9,16 +9,20 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import org.jetbrains.compose.web.css.px
 
-data class DesktopApp(var name: String, var icon: String, var opened: Int)
+data class DesktopApp(
+    val name: String,
+    val icon: String,
+    var opened: MutableState<Int> = mutableStateOf(0)
+)
 
 @Composable
-fun Apps() {
+fun Desktop() {
     var desktopApps by remember {
         mutableStateOf(
             listOf(
-                DesktopApp("profile", "profile.ico", 0),
-                DesktopApp("projects", "settings.ico", 0),
-                DesktopApp("settings", "settings.ico", 0)
+                DesktopApp("Profile", "profile.ico", mutableStateOf(0)),
+                DesktopApp("Projects", "settings.ico", mutableStateOf(0)),
+                DesktopApp("Settings", "settings.ico", mutableStateOf(0))
             )
         )
     }
@@ -27,7 +31,11 @@ fun Apps() {
         modifier = Modifier
             .fillMaxSize()
     ) {
-        ProfilePage()
+        desktopApps.forEach { app ->
+            for (i in 0..app.opened.value - 1) {
+                DesktopAppPage(app, { ProfilePage(app) })
+            }
+        }
 
         Box(
             modifier = Modifier
@@ -37,7 +45,7 @@ fun Apps() {
         ) {
             Row {
                 desktopApps.forEach { app ->
-                    AppIcon(app)
+                    DesktopAppIcon(app)
                 }
             }
         }

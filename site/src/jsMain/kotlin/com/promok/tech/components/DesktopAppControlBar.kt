@@ -14,7 +14,7 @@ import org.jetbrains.compose.web.dom.Text
 val gray = Color("#edeeed")
 
 @Composable
-fun AppTopControlBar(appName: String, iconSource: String, appWidth: CSSSizeValue<CSSUnit.px>) {
+fun DesktopAppControlBar(desktopApp: DesktopApp, appWidth: CSSSizeValue<CSSUnit.px>) {
     val iconSize = 15.px
 
     Box(
@@ -33,7 +33,7 @@ fun AppTopControlBar(appName: String, iconSource: String, appWidth: CSSSizeValue
                 "closeWindowCircle.ico", modifier = Modifier
                     .size(iconSize)
                     .translateX(10.px)
-                //.onMouseDown {// Here it should subtract 1 from the opened variable}
+                    .onMouseDown { desktopApp.opened.value-- }
             )
 
             Image(
@@ -52,7 +52,7 @@ fun AppTopControlBar(appName: String, iconSource: String, appWidth: CSSSizeValue
                 modifier = Modifier
                     .translateX((appWidth / 2) - (iconSize * 3 + 16.px))
             ) {
-                Text(appName)
+                Text(desktopApp.name)
             }
         }
     }
