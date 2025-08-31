@@ -33,7 +33,7 @@ fun Desktop() {
     ) {
         desktopApps.forEach { app ->
             for (i in 0..app.opened.value - 1) {
-                DesktopAppPage(app, { ProfilePage(app) })
+                AppWindow(app, { ProfilePage(app) })
             }
         }
 

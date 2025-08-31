@@ -7,14 +7,13 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.silk.components.graphics.Image
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Text
 
 val gray = Color("#edeeed")
 
 @Composable
-fun DesktopAppControlBar(desktopApp: DesktopApp, appWidth: CSSSizeValue<CSSUnit.px>) {
+fun TitleBar(desktopApp: DesktopApp, appWidth: CSSSizeValue<CSSUnit.px>) {
     val iconSize = 15.px
 
     Box(
@@ -29,24 +28,7 @@ fun DesktopAppControlBar(desktopApp: DesktopApp, appWidth: CSSSizeValue<CSSUnit.
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Image(
-                "closeWindowCircle.ico", modifier = Modifier
-                    .size(iconSize)
-                    .translateX(10.px)
-                    .onMouseDown { desktopApp.opened.value-- }
-            )
-
-            Image(
-                "maximizeWindowCircle.ico", modifier = Modifier
-                    .size(iconSize)
-                    .translateX(13.px)
-            )
-
-            Image(
-                "minimizeWindowCircle.ico", modifier = Modifier
-                    .size(iconSize)
-                    .translateX(16.px)
-            )
+            WindowControl(desktopApp, iconSize)
 
             Box(
                 modifier = Modifier

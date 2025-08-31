@@ -9,7 +9,7 @@ import com.varabyte.kobweb.compose.ui.thenIf
 import org.jetbrains.compose.web.css.*
 
 @Composable
-fun DesktopAppPage(desktopApp: DesktopApp, content: @Composable () -> Unit) {
+fun AppWindow(desktopApp: DesktopApp, content: @Composable () -> Unit) {
     var initialClickX by remember { mutableStateOf(0.px) }
     var initialClickY by remember { mutableStateOf(0.px) }
 
@@ -51,7 +51,7 @@ fun DesktopAppPage(desktopApp: DesktopApp, content: @Composable () -> Unit) {
                 .translateY(offsetY)
         ) {
             Column {
-                DesktopAppControlBar(desktopApp, 1000.px)
+                TitleBar(desktopApp, 1000.px)
 
                 Box(
                     modifier = Modifier

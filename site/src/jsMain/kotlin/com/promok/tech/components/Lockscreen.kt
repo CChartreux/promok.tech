@@ -43,7 +43,5 @@ fun LockScreenContent() {
         Box(modifier = Modifier.fontSize(200.percent)) {
             Div { Text(currentDate) }
         }
-
-
     }
 }
