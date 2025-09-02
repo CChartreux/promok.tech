@@ -31,7 +31,7 @@ fun DesktopAppIcon(desktopApp: DesktopApp) {
                 .onMouseEnter { hovered = true }
                 .onMouseLeave { hovered = false }
 
-                .onMouseDown { desktopApp.opened.value++ }
+                .onMouseDown { desktopApp.windowsOpen.value = 1 }
 
 
         ) {
@@ -63,7 +63,7 @@ fun DesktopAppIcon(desktopApp: DesktopApp) {
 
         }
 
-        AppIconCircle(desktopApp.opened.value)
+        AppIconCircle(desktopApp.windowsOpen.value)
     }
 }
 

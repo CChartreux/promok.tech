@@ -1,65 +1,51 @@
 package com.promok.tech.components
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.compose.ui.thenIf
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.LineStyle
+import org.jetbrains.compose.web.css.px
 
 @Composable
 fun AppWindow(desktopApp: DesktopApp, content: @Composable () -> Unit) {
-    var initialClickX by remember { mutableStateOf(0.px) }
-    var initialClickY by remember { mutableStateOf(0.px) }
+    val appWidth = 1000.px
+    val appHeight = 600.px
 
-    var dragStartX by remember { mutableStateOf(0.px) }
-    var dragStartY by remember { mutableStateOf(0.px) }
-
-    var isDragging by remember { mutableStateOf(false) }
-
-    var offsetX by remember { mutableStateOf(0.px) }
-    var offsetY by remember { mutableStateOf(0.px) }
+    val offsetX = remember { mutableStateOf(0.px) }
+    var offsetY = remember { mutableStateOf(0.px) }
 
     Box(
         modifier = Modifier
-            .position(Position.Absolute)
-            .onMouseDown { event ->
-                isDragging = true
-                initialClickX = event.clientX.px
-                initialClickY = event.clientY.px
-                dragStartX = offsetX
-                dragStartY = offsetY
+            .height(appHeight)
+            .width(appWidth)
+            .translate(offsetX.value, offsetY.value)
+            .zIndex(desktopApp.zIndex.value)
+
+            .onMouseDown {
+                desktopApp.clicked.value = true
+
+                console.log(desktopApp.name + " got clicked and has the z-Index of " + desktopApp.zIndex.value)
             }
-
-            .thenIf(isDragging) {
-                Modifier
-                    .onMouseMove { event ->
-                        offsetX = dragStartX + (event.clientX.px - initialClickX)
-                        offsetY = dragStartY + (event.clientY.px - initialClickY)
-                    }
-
-                    .size(1000.px)
-
-                    .onMouseUp { isDragging = false }
-            }
-            .translateX(offsetX)
 
     ) {
-        Box(
-            modifier = Modifier
-                .translateY(offsetY)
-        ) {
-            Column {
-                TitleBar(desktopApp, 1000.px)
+        Column {
+            TitleBar(desktopApp, appWidth, offsetX, offsetY)
 
-                Box(
-                    modifier = Modifier
-                        .height(600.px)
-                        .backgroundColor(Color.white)
-                ) {
-                    content()
-                }
+            Box(
+                modifier = Modifier
+                    .height(appHeight)
+                    .width(appWidth)
+                    .backgroundColor(Color.white)
+                    //.boxShadow(blurRadius = 6.px, color = Color.whitesmoke)
+                    .border(2.px, LineStyle.Solid, color = Color("#edeeed"))
+
+            ) {
+                content()
             }
         }
     }
