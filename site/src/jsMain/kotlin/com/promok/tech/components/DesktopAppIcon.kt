@@ -6,9 +6,11 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.icons.CircleIcon
 import com.varabyte.kobweb.silk.style.animation.toAnimation
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
@@ -28,10 +30,22 @@ fun DesktopAppIcon(desktopApp: DesktopApp) {
             modifier = Modifier
                 .height(70.px)
 
-                .onMouseEnter { hovered = true }
-                .onMouseLeave { hovered = false }
+                .onMouseEnter {
+                    hovered = true
+                    desktopApp.peak.value = true
+                }
+                .onMouseLeave {
+                    hovered = false
+                    desktopApp.peak.value = false
+                }
 
-                .onMouseDown { desktopApp.windowsOpen.value = 1 }
+                .onMouseDown {
+                    desktopApp.opened.value = true
+
+                    desktopApp.clicked.value = true
+
+                    desktopApp.minimized.value = false
+                }
 
 
         ) {
@@ -63,23 +77,37 @@ fun DesktopAppIcon(desktopApp: DesktopApp) {
 
         }
 
-        AppIconCircle(desktopApp.windowsOpen.value)
+        AppIconCircle(
+            desktopApp.opened.value,
+            color = Color.rgba(
+                desktopApp.baseColor.value.first,
+                desktopApp.baseColor.value.second,
+                desktopApp.baseColor.value.third,
+                0.8f
+            )
+        )
     }
 }
 
 @Composable
-fun AppIconCircle(amount: Int) {
-    val circleSize = 8.px
+fun AppIconCircle(opened: Boolean, color: Color) {
+    val circleSize = 12.px
 
     Row {
-        for (i in 1..amount) {
-            Image(
-                "openWindowsCircle.ico",
+        if (opened) {
+            CircleIcon(
                 modifier = Modifier
+                    .color(color = color)
                     .size(circleSize)
-                //.padding(right = 10.px)
-                //.translateX((appIconSize / 2) - (circleSize / 2))
             )
+
+//            Image(
+//                "openWindowsCircle.ico",
+//                modifier = Modifier
+//
+//                //.padding(right = 10.px)
+//                //.translateX((appIconSize / 2) - (circleSize / 2))
+//            )
         }
     }
 }

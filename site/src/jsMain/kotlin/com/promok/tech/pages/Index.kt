@@ -2,6 +2,7 @@ package com.promok.tech.pages
 
 import androidx.compose.runtime.*
 import com.promok.tech.components.*
+import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ fun HomePage() {
             .fillMaxSize()
             .backgroundColor(Color.black)
             .backgroundImage(url("background_image_homescreen.webp"))
+            .overflow(Overflow.Hidden)
     ) {
         if (unlocked) {
             // Unlocked state content

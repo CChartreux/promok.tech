@@ -5,20 +5,33 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
-import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.graphics.Color
+import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
+import org.jetbrains.compose.web.css.CSSSizeValue
+import org.jetbrains.compose.web.css.CSSUnit
 import org.jetbrains.compose.web.css.px
 
 data class DesktopApp(
     val name: String,
     val icon: String,
+    var baseColor: MutableState<Triple<Int, Int, Int>> = mutableStateOf(Triple(0, 255, 255)), // store RGB only,
+    var opened: MutableState<Boolean> = mutableStateOf(false),
+    var maximized: MutableState<Boolean> = mutableStateOf(false),
+    var minimized: MutableState<Boolean> = mutableStateOf(false),
     var clicked: MutableState<Boolean> = mutableStateOf(true),
-    var zIndex: MutableState<Int> = mutableStateOf(0)
+    var zIndex: MutableState<Int> = mutableStateOf(0),
+    var height: MutableState<CSSSizeValue<CSSUnit.px>> = mutableStateOf(0.px),
+    var width: MutableState<CSSSizeValue<CSSUnit.px>> = mutableStateOf(0.px),
+    var positionX: MutableState<CSSSizeValue<CSSUnit.px>> = mutableStateOf(0.px),
+    var positionY: MutableState<CSSSizeValue<CSSUnit.px>> = mutableStateOf(0.px),
+    var peak: MutableState<Boolean> = mutableStateOf(false),
+    var oldZIndex: MutableState<Int> = mutableStateOf(0)
 )
 
 @Composable
 fun Desktop() {
-    var topZ by remember { mutableStateOf(0) }
+    var topZ by remember { mutableStateOf(1) }
 
     var desktopApps by remember {
         mutableStateOf(
@@ -31,31 +44,73 @@ fun Desktop() {
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        desktopApps.forEach { app ->
-            if (app.clicked.value) {
-                app.zIndex.value = ++topZ
-                app.clicked.value = false
-            }
-            AppWindow(app, { ProfilePage(app) })
-        }
-    }
-
-    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = 20.px),
-        contentAlignment = Alignment.BottomCenter,
     ) {
-        Row {
-            desktopApps.forEach { app ->
-                DesktopAppIcon(app)
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            // Render the app windows and update dynamically
+            desktopApps.forEach { desktopApp ->
+                if (desktopApp.opened.value) {
+                    if (desktopApp.peak.value) {
+                        // store old zIndex if not already stored
+                        if (desktopApp.oldZIndex.value == 0) {
+                            desktopApp.oldZIndex.value = desktopApp.zIndex.value
+                        }
+                        desktopApp.zIndex.value = ++topZ
+                    } else {
+                        if (desktopApp.oldZIndex.value != 0) {
+                            desktopApp.zIndex.value = desktopApp.oldZIndex.value
+                            desktopApp.oldZIndex.value = 0
+                        }
+                    }
+
+                    if (desktopApp.clicked.value) {
+                        desktopApp.oldZIndex.value = 0
+                        desktopApp.zIndex.value = ++topZ
+                        desktopApp.clicked.value = false
+                    }
+
+                    if (!desktopApp.minimized.value) {
+                        AppWindow(desktopApp) { ProfilePage(desktopApp) }
+                    }
+                }
+            }
+
+
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 10.px)
+                .zIndex(Int.MAX_VALUE)
+                .styleModifier { property("pointer-events", "none") }, // ignore hits
+            contentAlignment = Alignment.BottomCenter,
+        ) {
+            Row(
+                modifier = Modifier
+                    .borderRadius(50.px)
+                    .padding(bottom = 10.px, left = 15.px, right = 5.px)
+                    .backgroundColor(
+                        color = Color.rgba(
+                            desktopApps[0].baseColor.value.first,
+                            desktopApps[0].baseColor.value.second,
+                            desktopApps[0].baseColor.value.third,
+                            0.1f
+                        )
+                    )
+                    .styleModifier { property("pointer-events", "auto") } // icons clickable
+            ) {
+                desktopApps.forEach { app ->
+                    DesktopAppIcon(app)
+                }
             }
         }
+
     }
 }
-
 
 /*
 * for (i in 0..<desktopApps.size) {

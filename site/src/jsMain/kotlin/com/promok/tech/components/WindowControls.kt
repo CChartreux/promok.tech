@@ -16,19 +16,20 @@ fun WindowControl(desktopApp: DesktopApp, iconSize: CSSSizeValue<CSSUnit.px>) {
         "closeWindowCircle.ico", modifier = Modifier
             .size(iconSize)
             .translateX(10.px)
-            .onMouseDown { desktopApp.windowsOpen.value-- }
+            .onMouseDown { desktopApp.opened.value = false }
     )
 
     Image(
         "maximizeWindowCircle.ico", modifier = Modifier
             .size(iconSize)
             .translateX(13.px)
-
+            .onMouseDown { desktopApp.maximized.value = !desktopApp.maximized.value }
     )
 
     Image(
         "minimizeWindowCircle.ico", modifier = Modifier
             .size(iconSize)
             .translateX(16.px)
+            .onMouseDown { desktopApp.minimized.value = true }
     )
 }
