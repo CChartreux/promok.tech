@@ -1,6 +1,8 @@
-package com.promok.tech.components
+package com.promok.tech.components.window
 
 import androidx.compose.runtime.Composable
+import com.promok.tech.components.desktop.DesktopApp
+import com.promok.tech.services.DesktopService
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseDown
 import com.varabyte.kobweb.compose.ui.modifiers.size
@@ -13,23 +15,26 @@ import org.jetbrains.compose.web.css.px
 @Composable
 fun WindowControl(desktopApp: DesktopApp, iconSize: CSSSizeValue<CSSUnit.px>) {
     Image(
-        "closeWindowCircle.ico", modifier = Modifier
+        "closeWindowCircle.ico",
+        modifier = Modifier
             .size(iconSize)
             .translateX(10.px)
-            .onMouseDown { desktopApp.opened.value = false }
+            .onMouseDown { DesktopService.closeApp(desktopApp) }
     )
 
     Image(
-        "maximizeWindowCircle.ico", modifier = Modifier
+        "maximizeWindowCircle.ico",
+        modifier = Modifier
             .size(iconSize)
             .translateX(13.px)
-            .onMouseDown { desktopApp.maximized.value = !desktopApp.maximized.value }
+            .onMouseDown { DesktopService.maximizeApp(desktopApp) }
     )
 
     Image(
-        "minimizeWindowCircle.ico", modifier = Modifier
+        "minimizeWindowCircle.ico",
+        modifier = Modifier
             .size(iconSize)
             .translateX(16.px)
-            .onMouseDown { desktopApp.minimized.value = true }
+            .onMouseDown { DesktopService.minimizeApp(desktopApp) }
     )
 }

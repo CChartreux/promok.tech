@@ -1,7 +1,11 @@
 package com.promok.tech.pages
 
 import androidx.compose.runtime.*
-import com.promok.tech.components.*
+import com.promok.tech.components.animations.ScrollUnlockAnimation
+import com.promok.tech.components.animations.unlockKeyframes
+import com.promok.tech.components.desktop.Desktop
+import com.promok.tech.components.lockscreen.LockScreenContent
+import com.promok.tech.components.lockscreen.UnlockMessage
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box

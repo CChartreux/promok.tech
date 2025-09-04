@@ -1,12 +1,7 @@
-package com.promok.tech.components
+package com.promok.tech.components.animations
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import com.promok.tech.components.theme.AppTheme
 import kotlinx.browser.window
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -24,10 +19,9 @@ fun ScrollUnlockAnimation(onUnlock: () -> Unit, content: @Composable (playAnimat
             if (we.deltaY > 0) { // negative deltaY means scrolling up
                 scope.launch {
                     playAnimation = true
-                    delay(200) // match animation duration
+                    delay(AppTheme.Animations.scrollUnlockDelay) // match animation duration
                     onUnlock()
                     playAnimation = false
-
                 }
             }
         }

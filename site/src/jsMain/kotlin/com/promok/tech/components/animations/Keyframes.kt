@@ -1,4 +1,4 @@
-package com.promok.tech.components
+package com.promok.tech.components.animations
 
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.translateY
@@ -19,10 +19,15 @@ val unlockKeyframes = Keyframes {
 
 val iconHoverKeyframesUp = Keyframes {
     from { Modifier.translateY(0.px) }
-    to { Modifier.translateY(-(10).px) }
+    to { Modifier.translateY(-(4).px) }
 }
 
 val iconHoverKeyframesDown = Keyframes {
     from { Modifier.translateY(0.px) }
-    to { Modifier.translateY(10.px) }
+    to { Modifier.translateY(4.px) }
+}
+
+val minimizeKeyframes = Keyframes {
+    from { Modifier.translateY(0.percent) }
+    to { Modifier.translateY((-100).percent) }
 }
