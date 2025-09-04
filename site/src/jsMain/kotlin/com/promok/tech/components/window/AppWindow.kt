@@ -40,6 +40,7 @@ fun AppWindow(desktopApp: DesktopApp, content: @Composable () -> Unit) {
                     }
                     .thenIf(desktopApp.isMaximized.value) {
                         Modifier.fillMaxSize()
+
                     }
             ) {
                 content()
