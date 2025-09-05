@@ -13,8 +13,19 @@ object AppRegistry {
         "Settings" to { desktopApp -> SettingsPage(desktopApp) }
     )
 
+    // Icons von icons8.de
+    private val appIcons = mapOf(
+        "Profile" to "app-icons/profile.ico",
+        "Projects" to "app-icons/projects.ico",
+        "Settings" to "app-icons/settings.ico"
+    )
+
     fun getAppComponent(appName: String): (@Composable (DesktopApp) -> Unit)? {
         return appComponents[appName]
+    }
+
+    fun getAppIcon(appName: String): String {
+        return appIcons[appName] ?: "default.ico"
     }
 
     fun getAllAppNames(): List<String> = appComponents.keys.toList()

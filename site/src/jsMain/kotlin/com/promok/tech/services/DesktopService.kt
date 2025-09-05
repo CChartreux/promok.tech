@@ -3,30 +3,33 @@ package com.promok.tech.services
 import androidx.compose.runtime.mutableStateOf
 import com.promok.tech.components.desktop.DesktopApp
 import com.promok.tech.components.theme.AppTheme
+import com.promok.tech.registry.AppRegistry
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.px
 
 object DesktopService {
-    private val apps = mutableStateOf(
-        listOf(
-            DesktopApp("Profile", "profile.ico"),
-            DesktopApp("Projects", "projects.ico"),
-            DesktopApp("Settings", "settings.ico"),
-            DesktopApp("Profile", "profile.ico"),
-            DesktopApp("Projects", "projects.ico"),
-            DesktopApp("Settings", "settings.ico")
-        )
+    val apps = mutableStateOf(
+        AppRegistry.getAllAppNames().map { appName ->
+            DesktopApp(
+                name = appName,
+                icon = AppRegistry.getAppIcon(appName)
+            )
+        }
     )
 
-    fun getApps(): List<DesktopApp> = apps.value
+    // Track the currently dragging app to prevent recomposition issues
+    var currentlyDraggingApp: DesktopApp? = null
 
     fun bringToFront(app: DesktopApp) {
-        val updatedApps = apps.value.toMutableList()
-        updatedApps.remove(app)
-        updatedApps.add(app) // Add to end (highest z-index)
+        // Don't update the apps list if we're currently dragging to avoid recomposition
+        if (currentlyDraggingApp == app) return
+
+        val updatedApps = apps.value.toMutableList().apply {
+            remove(app)
+            add(app)
+        }
         apps.value = updatedApps
 
-        // Update z-index values
         updatedApps.forEachIndexed { index, desktopApp ->
             desktopApp.zIndex.value = index + 1
         }
@@ -43,17 +46,14 @@ object DesktopService {
     }
 
     fun maximizeApp(app: DesktopApp) {
-        if (!app.isMaximized.value) {
-            app.isMaximized.value = !app.isMaximized.value
+        app.isMaximized.value = !app.isMaximized.value
 
+        if (app.isMaximized.value) {
             app.height.value = window.innerHeight.px
             app.width.value = window.innerWidth.px
-
             app.positionX.value = AppTheme.Defaults.position
             app.positionY.value = AppTheme.Defaults.position
         } else {
-            app.isMaximized.value = !app.isMaximized.value
-
             app.height.value = AppTheme.Sizes.defaultWindowHeight
             app.width.value = AppTheme.Sizes.defaultWindowWidth
         }

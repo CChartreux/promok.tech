@@ -17,34 +17,37 @@ fun AppWindow(desktopApp: DesktopApp, content: @Composable () -> Unit) {
             .width(desktopApp.width.value)
             .translate(desktopApp.positionX.value, desktopApp.positionY.value)
             .zIndex(desktopApp.zIndex.value)
-            .onMouseDown { desktopApp.isClicked.value = true }
     ) {
         Column {
             TitleBar(desktopApp, desktopApp.positionX, desktopApp.positionY)
-
-            Box(
-                modifier = Modifier
-                    .height(desktopApp.height.value)
-                    .width(desktopApp.width.value)
-                    .backgroundColor(AppTheme.Colors.white)
-                    .border(
-                        AppTheme.Sizes.windowBorderWidth,
-                        AppTheme.Borders.window,
-                        color = AppTheme.Colors.windowGray
-                    )
-                    .thenIf(desktopApp.isPeeking.value) {
-                        Modifier.boxShadow(
-                            blurRadius = AppTheme.Sizes.windowShadowBlur,
-                            color = AppTheme.Colors.whitesmoke
-                        )
-                    }
-                    .thenIf(desktopApp.isMaximized.value) {
-                        Modifier.fillMaxSize()
-
-                    }
-            ) {
-                content()
-            }
+            ContentArea(desktopApp, content)
         }
+    }
+}
+
+@Composable
+private fun ContentArea(desktopApp: DesktopApp, content: @Composable () -> Unit) {
+    Box(
+        modifier = Modifier
+            .height(desktopApp.height.value)
+            .width(desktopApp.width.value)
+            .backgroundColor(AppTheme.Colors.white)
+            .border(
+                AppTheme.Sizes.windowBorderWidth,
+                AppTheme.Borders.window,
+                color = AppTheme.Colors.windowGray
+            )
+            .thenIf(desktopApp.isPeeking.value) {
+                Modifier.boxShadow(
+                    blurRadius = AppTheme.Sizes.windowShadowBlur,
+                    color = AppTheme.Colors.whitesmoke
+                )
+            }
+            .onMouseDown {
+                // Only bring to front when clicking on content, not when dragging title bar
+                //DesktopService.bringToFront(desktopApp)
+            }
+    ) {
+        content()
     }
 }

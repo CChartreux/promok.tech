@@ -1,9 +1,11 @@
 package com.promok.tech.components.desktop
 
-import androidx.compose.runtime.*
-import com.promok.tech.components.pages.ProfilePage
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import com.promok.tech.components.theme.AppTheme
 import com.promok.tech.components.window.AppWindow
+import com.promok.tech.registry.AppRegistry
+import com.promok.tech.services.DesktopService
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -14,83 +16,50 @@ import org.jetbrains.compose.web.css.div
 
 @Composable
 fun Desktop() {
-    var topZ by remember { mutableStateOf(1) }
+    val desktopApps by DesktopService.apps
 
-    var desktopApps by remember {
-        mutableStateOf(
-            listOf(
-                DesktopApp("Profile", "profile.ico"),
-                DesktopApp("Projects", "settings.ico"),
-                DesktopApp("Settings", "settings.ico"),
-                DesktopApp("Profile", "profile.ico"),
-                DesktopApp("Projects", "settings.ico"),
-                DesktopApp("Settings", "settings.ico")
-            )
-        )
-    }
-
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            // Render the app windows and update dynamically
-            desktopApps.forEach { desktopApp ->
-                if (desktopApp.isOpened.value) {
-                    if (desktopApp.isPeeking.value) {
-                        // store old zIndex if not already stored
-                        if (desktopApp.oldZIndex.value == AppTheme.Defaults.zIndex) {
-                            desktopApp.oldZIndex.value = desktopApp.zIndex.value
-                        }
-                        desktopApp.zIndex.value = ++topZ
-                    } else {
-                        if (desktopApp.oldZIndex.value != AppTheme.Defaults.zIndex) {
-                            desktopApp.zIndex.value = desktopApp.oldZIndex.value
-                            desktopApp.oldZIndex.value = AppTheme.Defaults.zIndex
-                        }
-                    }
-
-                    if (desktopApp.isClicked.value) {
-                        desktopApp.oldZIndex.value = AppTheme.Defaults.zIndex
-                        desktopApp.zIndex.value = ++topZ
-                        desktopApp.isClicked.value = false
-                    }
-
-                    if (!desktopApp.isMinimized.value) {
-                        AppWindow(desktopApp) { ProfilePage(desktopApp) }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            desktopApps.forEach { app ->
+                if (app.isOpened.value && !app.isMinimized.value) {
+                    AppWindow(app) {
+                        AppRegistry.getAppComponent(app.name)?.invoke(app)
                     }
                 }
             }
         }
 
-        Box(
+        Taskbar(desktopApps)
+    }
+}
+
+@Composable
+private fun Taskbar(desktopApps: List<DesktopApp>) {
+    Box(
+        modifier = Modifier
+            .padding(bottom = AppTheme.Sizes.taskbarPaddingBottom)
+            .fillMaxSize()
+            .zIndex(AppTheme.ZIndex.taskbar)
+            .styleModifier { property("pointer-events", AppTheme.PointerEvents.none) },
+        contentAlignment = Alignment.BottomCenter,
+    ) {
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = AppTheme.Sizes.taskbarPaddingBottom)
-                .zIndex(AppTheme.ZIndex.taskbar)
-                .styleModifier { property("pointer-events", AppTheme.PointerEvents.none) },
-            contentAlignment = Alignment.BottomCenter,
+                .borderRadius(AppTheme.Borders.taskbarRadius)
+                .padding(
+                    left = AppTheme.Sizes.taskbarPaddingHorizontal,
+                    right = AppTheme.Sizes.taskbarPaddingHorizontal / 3
+                )
+                .backgroundColor(
+                    color = AppTheme.Colors.rgbaFromTriple(
+                        desktopApps.first().baseColor.value,
+                        AppTheme.Opacity.taskbarBackground
+                    )
+                )
+                .styleModifier { property("pointer-events", AppTheme.PointerEvents.auto) }
         ) {
-            Row(
-                modifier = Modifier
-                    .borderRadius(AppTheme.Borders.taskbarRadius)
-                    .padding(
-                        bottom = AppTheme.Sizes.taskbarPaddingBottom,
-                        left = AppTheme.Sizes.taskbarPaddingHorizontal,
-                        right = AppTheme.Sizes.taskbarPaddingHorizontal / 3
-                    )
-                    .backgroundColor(
-                        color = AppTheme.Colors.rgbaFromTriple(
-                            desktopApps[0].baseColor.value,
-                            AppTheme.Opacity.taskbarBackground
-                        )
-                    )
-                    .styleModifier { property("pointer-events", AppTheme.PointerEvents.auto) }
-            ) {
-                desktopApps.forEach { app ->
-                    DesktopAppIcon(app)
-                }
+            desktopApps.forEach { app ->
+                DesktopAppIcon(app)
             }
         }
     }

@@ -26,23 +26,59 @@ fun TitleBar(
     var dragStartY by remember { mutableStateOf(AppTheme.Defaults.position) }
     var isDragging by remember { mutableStateOf(false) }
 
+    // Add a global mouse up listener to handle drag release outside the window
+    DisposableEffect(isDragging) {
+        if (isDragging) {
+            DesktopService.currentlyDraggingApp = desktopApp
+
+            val onGlobalMouseUp = { _: Any ->
+                isDragging = false
+                DesktopService.currentlyDraggingApp = null
+                // Now that dragging is done, bring to front
+                DesktopService.bringToFront(desktopApp)
+            }
+
+            // Add global event listener
+            kotlinx.browser.window.addEventListener("mouseup", onGlobalMouseUp)
+
+            // Cleanup
+            onDispose {
+                kotlinx.browser.window.removeEventListener("mouseup", onGlobalMouseUp)
+                DesktopService.currentlyDraggingApp = null
+            }
+        } else {
+            onDispose { }
+        }
+    }
+
     Box(
         modifier = Modifier
             .thenIf(desktopApp.isPeeking.value) {
                 Modifier.boxShadow(blurRadius = AppTheme.Sizes.windowShadowBlur, color = AppTheme.Colors.windowGray)
             }
     ) {
+        // This is the invisible drag handle that covers the entire title bar
         Box(
             modifier = Modifier
                 .position(Position.Absolute)
+                .width(desktopApp.width.value)
+                .height(AppTheme.Sizes.titleBarHeight)
                 .onMouseDown { event ->
                     isDragging = true
                     initialClickX = event.clientX.px
                     initialClickY = event.clientY.px
                     dragStartX = offsetX.value
                     dragStartY = offsetY.value
+
+                    // Only bring to front if not already dragging
+                    if (!isDragging) {
+                        DesktopService.bringToFront(desktopApp)
+                    }
+                    event.stopPropagation() // Prevent event from propagating to other windows
                 }
-                .onDoubleClick { desktopApp.isMaximized.value = !desktopApp.isMaximized.value }
+                .onDoubleClick {
+                    desktopApp.isMaximized.value = !desktopApp.isMaximized.value
+                }
                 .then(
                     if (isDragging) {
                         Modifier
@@ -55,19 +91,18 @@ fun TitleBar(
                                 offsetY.value = dragStartY + (event.clientY.px - initialClickY)
                                 desktopApp.positionX.value = offsetX.value
                                 desktopApp.positionY.value = offsetY.value
+                                event.stopPropagation() // Prevent event from propagating to other windows
                             }
                             .width(AppTheme.Sizes.dragBoxWidth)
                             .height(AppTheme.Sizes.dragBoxHeight)
                             .translate(AppTheme.Sizes.dragBoxTranslation, AppTheme.Sizes.dragBoxTranslation)
-                            .onMouseUp { isDragging = false }
                     } else {
                         Modifier
-                            .width(desktopApp.width.value)
-                            .height(AppTheme.Sizes.titleBarHeight)
                     }
                 )
         )
 
+        // This is the visible title bar content
         Row(
             modifier = Modifier
                 .width(desktopApp.width.value)

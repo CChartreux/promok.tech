@@ -15,7 +15,7 @@ import org.jetbrains.compose.web.css.px
 @Composable
 fun WindowControl(desktopApp: DesktopApp, iconSize: CSSSizeValue<CSSUnit.px>) {
     Image(
-        "closeWindowCircle.ico",
+        "window-controls/closeWindowCircle.ico",
         modifier = Modifier
             .size(iconSize)
             .translateX(10.px)
@@ -23,7 +23,7 @@ fun WindowControl(desktopApp: DesktopApp, iconSize: CSSSizeValue<CSSUnit.px>) {
     )
 
     Image(
-        "maximizeWindowCircle.ico",
+        "window-controls/maximizeWindowCircle.ico",
         modifier = Modifier
             .size(iconSize)
             .translateX(13.px)
@@ -31,7 +31,7 @@ fun WindowControl(desktopApp: DesktopApp, iconSize: CSSSizeValue<CSSUnit.px>) {
     )
 
     Image(
-        "minimizeWindowCircle.ico",
+        "window-controls/minimizeWindowCircle.ico",
         modifier = Modifier
             .size(iconSize)
             .translateX(16.px)

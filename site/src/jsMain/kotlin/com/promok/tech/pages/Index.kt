@@ -29,14 +29,15 @@ fun HomePage() {
         modifier = Modifier
             .fillMaxSize()
             .backgroundColor(Color.black)
-            .backgroundImage(url("background_image_homescreen.webp"))
+            .backgroundImage(url("background/background_image_homescreen.webp"))
             .overflow(Overflow.Hidden)
     ) {
         if (unlocked) {
             // Unlocked state content
             Column(
                 modifier = Modifier.fillMaxSize().backgroundColor(Color.black)
-                    .backgroundImage(url("background_image_homescreen.webp")).color(Color.white).fontFamily("Doto"),
+                    .backgroundImage(url("background/background_image_homescreen.webp")).color(Color.white)
+                    .fontFamily("Doto"),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Desktop()
@@ -47,7 +48,7 @@ fun HomePage() {
                 Column(
                     modifier = Modifier
                         .fillMaxSize().backgroundColor(Color.black)
-                        .backgroundImage(url("background_image_lockscreen.webp"))
+                        .backgroundImage(url("background/background_image_lockscreen.webp"))
                         .color(Color.white).fontFamily("Doto")
                         .then(
                             if (playAnimation) Modifier.animation(
