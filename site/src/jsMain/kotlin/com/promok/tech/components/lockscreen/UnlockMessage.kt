@@ -4,13 +4,11 @@ import androidx.compose.runtime.Composable
 import com.promok.tech.components.animations.upAndDownKeyframes
 import com.promok.tech.components.theme.AppTheme
 import com.varabyte.kobweb.compose.css.AnimationIterationCount
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.animation
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.icons.fa.FaArrowUp
 import com.varabyte.kobweb.silk.style.animation.toAnimation
 import org.jetbrains.compose.web.css.AnimationDirection
@@ -30,6 +28,7 @@ fun UnlockMessage() {
         FaArrowUp(
             modifier = Modifier
                 .padding(bottom = 15.px)
+                .color(AppTheme.Colors.Specific.lockscreenTextSecondary)
                 .animation(
                     upAndDownKeyframes.toAnimation(
                         duration = AppTheme.Animations.unlockAnimationDuration,
@@ -40,6 +39,8 @@ fun UnlockMessage() {
                 )
         )
 
-        Text("SCROLL UP TO UNLOCK")
+        Box(modifier = Modifier.color(AppTheme.Colors.Specific.lockscreenTextSecondary)) {
+            Text("SCROLL UP TO UNLOCK")
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.promok.tech.components.window
 import androidx.compose.runtime.Composable
 import com.promok.tech.components.desktop.DesktopApp
 import com.promok.tech.components.theme.AppTheme
+import com.promok.tech.services.DesktopService
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -20,6 +21,7 @@ fun AppWindow(desktopApp: DesktopApp, content: @Composable () -> Unit) {
     ) {
         Column {
             TitleBar(desktopApp, desktopApp.positionX, desktopApp.positionY)
+
             ContentArea(desktopApp, content)
         }
     }
@@ -31,21 +33,21 @@ private fun ContentArea(desktopApp: DesktopApp, content: @Composable () -> Unit)
         modifier = Modifier
             .height(desktopApp.height.value)
             .width(desktopApp.width.value)
-            .backgroundColor(AppTheme.Colors.white)
+            .backgroundColor(AppTheme.Colors.currentTheme.windowBackground)
             .border(
                 AppTheme.Sizes.windowBorderWidth,
                 AppTheme.Borders.window,
-                color = AppTheme.Colors.windowGray
+                color = AppTheme.Colors.currentTheme.windowBorder
             )
             .thenIf(desktopApp.isPeeking.value) {
                 Modifier.boxShadow(
                     blurRadius = AppTheme.Sizes.windowShadowBlur,
-                    color = AppTheme.Colors.whitesmoke
+                    color = AppTheme.Colors.Common.shadow
                 )
             }
             .onMouseDown {
                 // Only bring to front when clicking on content, not when dragging title bar
-                //DesktopService.bringToFront(desktopApp)
+                DesktopService.bringToFront(desktopApp)
             }
     ) {
         content()

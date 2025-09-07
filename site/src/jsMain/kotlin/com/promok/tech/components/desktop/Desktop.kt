@@ -52,7 +52,7 @@ private fun Taskbar(desktopApps: List<DesktopApp>) {
                 )
                 .backgroundColor(
                     color = AppTheme.Colors.rgbaFromTriple(
-                        desktopApps.first().baseColor.value,
+                        AppTheme.Colors.currentTheme.accentColor,
                         AppTheme.Opacity.taskbarBackground
                     )
                 )

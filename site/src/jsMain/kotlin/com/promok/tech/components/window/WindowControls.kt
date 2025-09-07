@@ -22,19 +22,29 @@ fun WindowControl(desktopApp: DesktopApp, iconSize: CSSSizeValue<CSSUnit.px>) {
             .onMouseDown { DesktopService.closeApp(desktopApp) }
     )
 
-    Image(
-        "window-controls/maximizeWindowCircle.ico",
-        modifier = Modifier
-            .size(iconSize)
-            .translateX(13.px)
-            .onMouseDown { DesktopService.maximizeApp(desktopApp) }
-    )
+    if (desktopApp.isResizeable.value) {
+        Image(
+            "window-controls/maximizeWindowCircle.ico",
+            modifier = Modifier
+                .size(iconSize)
+                .translateX(13.px)
+                .onMouseDown { DesktopService.maximizeApp(desktopApp) }
+        )
 
-    Image(
-        "window-controls/minimizeWindowCircle.ico",
-        modifier = Modifier
-            .size(iconSize)
-            .translateX(16.px)
-            .onMouseDown { DesktopService.minimizeApp(desktopApp) }
-    )
+        Image(
+            "window-controls/minimizeWindowCircle.ico",
+            modifier = Modifier
+                .size(iconSize)
+                .translateX(16.px)
+                .onMouseDown { DesktopService.minimizeApp(desktopApp) }
+        )
+    } else {
+        Image(
+            "window-controls/minimizeWindowCircle.ico",
+            modifier = Modifier
+                .size(iconSize)
+                .translateX(13.px)
+                .onMouseDown { DesktopService.minimizeApp(desktopApp) }
+        )
+    }
 }

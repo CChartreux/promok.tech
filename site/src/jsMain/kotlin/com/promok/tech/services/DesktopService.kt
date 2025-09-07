@@ -12,7 +12,8 @@ object DesktopService {
         AppRegistry.getAllAppNames().map { appName ->
             DesktopApp(
                 name = appName,
-                icon = AppRegistry.getAppIcon(appName)
+                icon = AppRegistry.getAppIcon(appName),
+                baseColor = mutableStateOf(AppTheme.Colors.currentTheme.accentColor)
             )
         }
     )
@@ -21,9 +22,18 @@ object DesktopService {
     var currentlyDraggingApp: DesktopApp? = null
 
     fun bringToFront(app: DesktopApp) {
-        // Don't update the apps list if we're currently dragging to avoid recomposition
-        if (currentlyDraggingApp == app) return
+        // If we're currently dragging this app, don't update its z-index
+        if (currentlyDraggingApp == app) {
+            // Only update other apps' z-indices
+            apps.value.forEach { otherApp ->
+                if (otherApp != app && otherApp.zIndex.value >= app.zIndex.value) {
+                    otherApp.zIndex.value = otherApp.zIndex.value - 1
+                }
+            }
+            return
+        }
 
+        // Normal behavior for non-dragged apps
         val updatedApps = apps.value.toMutableList().apply {
             remove(app)
             add(app)

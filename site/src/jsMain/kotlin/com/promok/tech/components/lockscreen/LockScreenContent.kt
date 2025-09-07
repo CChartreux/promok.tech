@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -36,10 +37,16 @@ fun LockScreenContent() {
             .padding(top = AppTheme.Sizes.lockScreenTopPadding),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(modifier = Modifier.fontSize(AppTheme.Sizes.lockScreenTimeFontSize)) {
+        Box(
+            modifier = Modifier.fontSize(AppTheme.Sizes.lockScreenTimeFontSize)
+                .color(AppTheme.Colors.Specific.lockscreenTextPrimary)
+        ) {
             Div { Text(currentTime) }
         }
-        Box(modifier = Modifier.fontSize(AppTheme.Sizes.lockScreenDateFontSize)) {
+        Box(
+            modifier = Modifier.fontSize(AppTheme.Sizes.lockScreenDateFontSize)
+                .color(AppTheme.Colors.Specific.lockscreenTextSecondary)
+        ) {
             Div { Text(currentDate) }
         }
     }

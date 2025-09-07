@@ -21,5 +21,6 @@ data class DesktopApp(
     val positionX: MutableState<CSSSizeValue<CSSUnit.px>> = mutableStateOf(0.px),
     val positionY: MutableState<CSSSizeValue<CSSUnit.px>> = mutableStateOf(0.px),
     val isPeeking: MutableState<Boolean> = mutableStateOf(false),
-    val oldZIndex: MutableState<Int> = mutableStateOf(0)
+    val oldZIndex: MutableState<Int> = mutableStateOf(0),
+    val isResizeable: MutableState<Boolean> = mutableStateOf(true),
 )

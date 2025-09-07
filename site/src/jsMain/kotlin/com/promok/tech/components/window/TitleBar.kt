@@ -54,7 +54,7 @@ fun TitleBar(
     Box(
         modifier = Modifier
             .thenIf(desktopApp.isPeeking.value) {
-                Modifier.boxShadow(blurRadius = AppTheme.Sizes.windowShadowBlur, color = AppTheme.Colors.windowGray)
+                Modifier.boxShadow(blurRadius = AppTheme.Sizes.windowShadowBlur, color = AppTheme.Colors.Common.shadow)
             }
     ) {
         // This is the invisible drag handle that covers the entire title bar
@@ -77,7 +77,7 @@ fun TitleBar(
                     event.stopPropagation() // Prevent event from propagating to other windows
                 }
                 .onDoubleClick {
-                    desktopApp.isMaximized.value = !desktopApp.isMaximized.value
+                    DesktopService.maximizeApp(desktopApp)
                 }
                 .then(
                     if (isDragging) {
@@ -107,8 +107,8 @@ fun TitleBar(
             modifier = Modifier
                 .width(desktopApp.width.value)
                 .height(AppTheme.Sizes.titleBarHeight)
-                .backgroundColor(AppTheme.Colors.windowGray)
-                .color(AppTheme.Colors.black)
+                .backgroundColor(AppTheme.Colors.currentTheme.windowTitleBar)
+                .color(AppTheme.Colors.currentTheme.textPrimary)
                 .fontWeight(FontWeight.ExtraBlack)
                 .borderRadius(
                     topRight = AppTheme.Borders.windowRadiusTop,
