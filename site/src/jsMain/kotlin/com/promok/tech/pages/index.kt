@@ -1,0 +1,13 @@
+package com.promok.tech.pages
+
+import androidx.compose.runtime.Composable
+import com.promok.tech.components.Workstation
+import com.varabyte.kobweb.core.Page
+
+@Page
+@Composable
+fun index() {
+    val workstation = Workstation()
+
+    workstation.render()
+}
