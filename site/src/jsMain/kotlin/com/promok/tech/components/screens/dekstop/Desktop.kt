@@ -1,4 +1,4 @@
-package com.promok.tech.components.screens
+package com.promok.tech.components.screens.dekstop
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -18,23 +18,23 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
 import com.varabyte.kobweb.compose.ui.modifiers.overflow
 
-class Lockscreen(private val isWorkstationUnlocked: MutableState<Boolean>) : Screen {
-    private var _backgroundImageUrl: MutableState<CSSUrl> =
-        mutableStateOf(url("https://cdn.pixabay.com/photo/2025/09/19/05/48/mountain-range-9842371_1280.jpg"))
+class Desktop(private val isWorkstationUnlocked: MutableState<Boolean>) : Screen {
+    private val _backgroundImageUrl: MutableState<CSSUrl> =
+        mutableStateOf(url("https://wallpapers.com/images/hd/2440x1440-desktop-pc-background-wkvl5uwxyeuanzts.jpg"))
 
     override val backgroundImageUrl: State<CSSUrl> get() = _backgroundImageUrl
 
     @Composable
     override fun render() {
         Box(
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .backgroundImage(_backgroundImageUrl.value)
-                .background { repeat(BackgroundRepeat.NoRepeat) }
-                .background { size(BackgroundSize.Cover) }
+                .background { repeat(BackgroundRepeat.Companion.NoRepeat) }
+                .background { size(BackgroundSize.Companion.Cover) }
                 .fillMaxSize()
-                .overflow(Overflow.Hidden)
+                .overflow(Overflow.Companion.Hidden)
 
-                .onClick { isWorkstationUnlocked.value = true },
+                .onClick { isWorkstationUnlocked.value = false },
         ) {
 
         }
