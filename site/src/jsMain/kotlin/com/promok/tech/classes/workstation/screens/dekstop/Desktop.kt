@@ -1,4 +1,4 @@
-package com.promok.tech.components.screens.dekstop
+package com.promok.tech.classes.workstation.screens.dekstop
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -12,11 +12,7 @@ import com.varabyte.kobweb.compose.css.functions.CSSUrl
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.background
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundImage
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
-import com.varabyte.kobweb.compose.ui.modifiers.onClick
-import com.varabyte.kobweb.compose.ui.modifiers.overflow
+import com.varabyte.kobweb.compose.ui.modifiers.*
 
 class Desktop(private val isWorkstationUnlocked: MutableState<Boolean>) : Screen {
     private val _backgroundImageUrl: MutableState<CSSUrl> =

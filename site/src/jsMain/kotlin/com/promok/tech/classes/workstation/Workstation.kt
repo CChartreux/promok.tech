@@ -1,10 +1,10 @@
-package com.promok.tech.components
+package com.promok.tech.classes.workstation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import com.promok.tech.components.screens.dekstop.Desktop
-import com.promok.tech.components.screens.lockscreen.Lockscreen
+import com.promok.tech.classes.workstation.screens.dekstop.Desktop
+import com.promok.tech.classes.workstation.screens.lockscreen.Lockscreen
 
 class Workstation {
     private var isWorkstationUnlocked: MutableState<Boolean> = mutableStateOf(false)
