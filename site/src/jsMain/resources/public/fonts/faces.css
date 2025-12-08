@@ -1,4 +1,14 @@
 @font-face {
     font-family: 'Doto';
-    src: url("/fonts/doto/Doto-regular.ttf");
+    src: url("/fonts/Doto/Doto-regular.ttf");
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("/fonts/Inter/Inter-VariableFont_opsz,wght.ttf");
+}
+
+@font-face {
+    font-family: 'ADLaM_Display';
+    src: url("/fonts/ADLam_Display/ADLaMDisplay-Regular.ttf");
 }

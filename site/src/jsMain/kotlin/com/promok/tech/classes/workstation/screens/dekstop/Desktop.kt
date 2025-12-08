@@ -23,12 +23,12 @@ class Desktop(private val isWorkstationUnlocked: MutableState<Boolean>) : Screen
     @Composable
     override fun render() {
         Box(
-            modifier = Modifier.Companion
+            modifier = Modifier
                 .backgroundImage(_backgroundImageUrl.value)
-                .background { repeat(BackgroundRepeat.Companion.NoRepeat) }
-                .background { size(BackgroundSize.Companion.Cover) }
+                .background { repeat(BackgroundRepeat.NoRepeat) }
+                .background { size(BackgroundSize.Cover) }
                 .fillMaxSize()
-                .overflow(Overflow.Companion.Hidden)
+                .overflow(Overflow.Hidden)
 
                 .onClick { isWorkstationUnlocked.value = false },
         ) {

@@ -19,7 +19,7 @@ kobweb {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
             }
 
-            description.set("Powered by Kobweb")
+            description.set("Portfolio Website from Peter Promok; Powered by Kobweb")
         }
     }
 }
