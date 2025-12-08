@@ -1,4 +1,4 @@
-package com.promok.tech.classes.workstation.screens.dekstop
+package com.promok.tech.app.components.workstation.screens.dekstop
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState

@@ -1,4 +1,4 @@
-package com.promok.tech.classes.themes.font
+package com.promok.tech.themes.font
 
 object FontFamily {
     val Doto: String = "Doto"

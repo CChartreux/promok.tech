@@ -1,8 +1,6 @@
-package com.promok.tech.classes.components
+package com.promok.tech.app.components.util.clock
 
 import androidx.compose.runtime.*
-import com.promok.tech.classes.ClockFormat
-import com.promok.tech.classes.themes.ClockTheme
 import com.promok.tech.interfaces.Components
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -24,15 +22,20 @@ class Clock(val clockTheme: ClockTheme) : Components {
             while (true) {
                 date = Date()
 
-                if (clockTheme.clockFormat.contains(ClockFormat.SHOW_ALL)) time =
-                    date.getHours().toString() + ":" + date.getMinutes().toString() + ":" + date.getSeconds().toString()
-                else {
+                if (clockTheme.clockFormat.contains(ClockFormat.SHOW_ALL)) {
+                    time = if (date.getHours() > 12) (date.getHours() - 12).toString().padStart(2, '0')
+                    else date.getHours().toString()
+                    time +=
+                        date.getHours().toString() + ":" + date.getMinutes().toString() + ":" + date.getSeconds()
+                            .toString().padStart(2, '0')
+                } else {
                     if (clockTheme.clockFormat.contains(ClockFormat.SHOW_HOURS)) time =
-                        date.getHours().toString()
+                        if (date.getHours() > 12) (date.getHours() - 12).toString().padStart(2, '0')
+                        else date.getHours().toString().padStart(2, '0')
                     if (clockTheme.clockFormat.contains(ClockFormat.SHOW_MINUTES)) time +=
-                        ":" + date.getMinutes().toString()
+                        ":" + date.getMinutes().toString().padStart(2, '0')
                     if (clockTheme.clockFormat.contains(ClockFormat.SHOW_SECONDS)) time +=
-                        ":" + date.getSeconds().toString()
+                        ":" + date.getSeconds().toString().padStart(2, '0')
                 }
 
                 delay(1000L) // wait 1 second
@@ -40,7 +43,7 @@ class Clock(val clockTheme: ClockTheme) : Components {
         }
 
         Column(
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .color(clockTheme.fontColor)
                 .fontSize(clockTheme.fontSize)
                 .fontWeight(clockTheme.fontWeight)

@@ -1,6 +1,9 @@
-package com.promok.tech.classes.workstation.screens.lockscreen
+package com.promok.tech.app.components.workstation.screens.lockscreen
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.varabyte.kobweb.compose.css.AlignItems
 import com.varabyte.kobweb.compose.css.JustifyContent
 import com.varabyte.kobweb.compose.css.Overflow
@@ -17,14 +20,15 @@ import org.jetbrains.compose.web.dom.Input
 import org.jetbrains.compose.web.dom.Text
 
 class Unlockscreen(private val isWorkstationUnlocked: MutableState<Boolean>) {
-    private val _isWorkstationUnlocking: MutableState<Boolean> = mutableStateOf(false)
-    val isWorkstationUnlocking: State<Boolean> get() = _isWorkstationUnlocking
+    private val _isWorkstationUnlocking = mutableStateOf(false)
+    val isWorkstationUnlocking get() = mutableStateOf(false)
+
     fun unlockWorkstation() {
         _isWorkstationUnlocking.value = true
     }
 
     fun lockWorkstation() {
-        _isWorkstationUnlocking.value = false
+        _isWorkstationUnlocking.value = false;
     }
 
     @Composable

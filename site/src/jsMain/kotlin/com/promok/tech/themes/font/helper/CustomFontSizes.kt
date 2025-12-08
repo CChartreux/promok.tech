@@ -1,4 +1,4 @@
-package com.promok.tech.classes.themes.font.helper
+package com.promok.tech.themes.font.helper
 
 import com.varabyte.kobweb.compose.css.FontSize
 
