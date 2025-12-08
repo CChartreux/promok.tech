@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main   # triggers automatically whenever a new commit is pushed to main
+      - master   # triggers automatically whenever a new commit is pushed to main
 
 jobs:
   build:
