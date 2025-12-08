@@ -3,7 +3,8 @@ name: Deploy Kobweb site
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]  # or your default branch
+    branches:
+      - main   # triggers automatically whenever a new commit is pushed to main
 
 jobs:
   build:
