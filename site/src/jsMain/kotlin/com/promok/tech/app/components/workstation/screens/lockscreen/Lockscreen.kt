@@ -10,17 +10,17 @@ import com.promok.tech.app.components.util.clock.ClockTheme
 import com.promok.tech.interfaces.Screen
 import com.promok.tech.themes.font.FontFamily
 import com.promok.tech.themes.font.helper.Huge
-import com.varabyte.kobweb.compose.css.BackgroundRepeat
-import com.varabyte.kobweb.compose.css.BackgroundSize
-import com.varabyte.kobweb.compose.css.FontSize
-import com.varabyte.kobweb.compose.css.Overflow
+import com.varabyte.kobweb.compose.css.*
 import com.varabyte.kobweb.compose.css.functions.CSSUrl
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.px
 
 class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
     // Member variables
@@ -37,7 +37,8 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
     // Clock component
     private val clockTheme: ClockTheme = ClockTheme(
         fontSize = FontSize.Huge,
-        fontFamily = FontFamily.ADLaM_Display,
+        fontFamily = FontFamily.Inter,
+        fontWeight = FontWeight.Bold,
         clockFormat = setOf(ClockFormat.SHOW_HOURS, ClockFormat.SHOW_MINUTES, ClockFormat.TWELVE_HOUR)
     )
 
@@ -73,7 +74,14 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
                     }
             ) {
                 if (unlockscreen.isWorkstationUnlocking.value) unlockscreen.render()
-                else clock.render()
+                else Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding { top(100.px) },
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    clock.render()
+                }
             }
         }
 

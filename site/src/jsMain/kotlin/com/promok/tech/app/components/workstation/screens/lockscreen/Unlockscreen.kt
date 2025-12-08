@@ -21,7 +21,7 @@ import org.jetbrains.compose.web.dom.Text
 
 class Unlockscreen(private val isWorkstationUnlocked: MutableState<Boolean>) {
     private val _isWorkstationUnlocking = mutableStateOf(false)
-    val isWorkstationUnlocking get() = mutableStateOf(false)
+    val isWorkstationUnlocking get() = _isWorkstationUnlocking
 
     fun unlockWorkstation() {
         _isWorkstationUnlocking.value = true
