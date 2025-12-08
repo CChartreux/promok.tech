@@ -1,7 +1,7 @@
 package com.promok.tech.app.components.util.clock
 
 import androidx.compose.runtime.*
-import com.promok.tech.interfaces.Components
+import com.promok.tech.app.components.Components
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color

@@ -9,6 +9,7 @@ import org.jetbrains.compose.web.css.CSSColorValue
 interface GlobalTheme {
     val backgroundColor: CSSColorValue get() = currentTheme.backgroundColor
     val textColor: CSSColorValue get() = currentTheme.textColor
+    val secondaryTextColor: CSSColorValue get() = currentTheme.secondaryTextColor
     val primaryColor: CSSColorValue get() = currentTheme.primaryColor
     val secondaryColor: CSSColorValue get() = currentTheme.secondaryColor
 

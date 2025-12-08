@@ -10,7 +10,8 @@ import com.promok.tech.app.components.util.clock.ClockTheme
 import com.promok.tech.app.components.util.date.Date
 import com.promok.tech.app.components.util.date.DateFormat
 import com.promok.tech.app.components.util.date.DateTheme
-import com.promok.tech.interfaces.Screen
+import com.promok.tech.app.components.util.lockscreen.widgets.Forecast
+import com.promok.tech.app.components.workstation.screens.Screen
 import com.promok.tech.themes.font.FontFamily
 import com.promok.tech.themes.font.helper.Huge
 import com.varabyte.kobweb.compose.css.*
@@ -18,6 +19,7 @@ import com.varabyte.kobweb.compose.css.functions.CSSUrl
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -32,10 +34,8 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
 
     override val backgroundImageUrl: State<CSSUrl> get() = _backgroundImageUrl
 
-
     // Unlock Screen
     private val unlockscreen: Unlockscreen = Unlockscreen(isWorkstationUnlocked)
-
 
     // Clock component
     private val clockTheme: ClockTheme = ClockTheme(
@@ -93,6 +93,10 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
                 ) {
                     clock.render()
                     date.render()
+
+                    Row {
+                        Forecast.render()
+                    }
                 }
             }
         }
