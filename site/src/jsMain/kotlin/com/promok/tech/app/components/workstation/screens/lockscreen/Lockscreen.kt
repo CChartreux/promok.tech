@@ -7,6 +7,9 @@ import androidx.compose.runtime.mutableStateOf
 import com.promok.tech.app.components.util.clock.Clock
 import com.promok.tech.app.components.util.clock.ClockFormat
 import com.promok.tech.app.components.util.clock.ClockTheme
+import com.promok.tech.app.components.util.date.Date
+import com.promok.tech.app.components.util.date.DateFormat
+import com.promok.tech.app.components.util.date.DateTheme
 import com.promok.tech.interfaces.Screen
 import com.promok.tech.themes.font.FontFamily
 import com.promok.tech.themes.font.helper.Huge
@@ -45,6 +48,14 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
     private val clock: Clock = Clock(clockTheme)
 
 
+    private val dateTheme: DateTheme = DateTheme(
+        fontSize = FontSize.XXLarge,
+        fontFamily = FontFamily.Inter,
+        dateFormat = setOf(DateFormat.SHOW_DAY_NAME, DateFormat.SHOW_MONTH_NAME, DateFormat.SHOW_YEAR_ABBREVIATION)
+    )
+
+    private val date: Date = Date(dateTheme)
+
     @Composable
     override fun render() {
         Box(
@@ -81,6 +92,7 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     clock.render()
+                    date.render()
                 }
             }
         }
