@@ -1,6 +1,8 @@
 package com.promok.tech.app.components.util.lockscreen.widgets
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.FontSize
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -28,6 +30,8 @@ object Forecast : Widget {
             Row(
                 modifier = Modifier
                     .color(WidgetTheme.secondaryTextColor)
+                    .fontSize(FontSize.Small)
+                    .fontWeight(FontWeight.Light)
             ) {
                 Text(seeMoreText)
             }
