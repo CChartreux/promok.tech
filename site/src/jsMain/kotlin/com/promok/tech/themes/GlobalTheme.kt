@@ -7,10 +7,10 @@ import org.jetbrains.compose.web.css.CSSColorValue
 
 // Base theme
 interface GlobalTheme {
-    val backgroundColor: CSSColorValue
-    val textColor: CSSColorValue
-    val primaryColor: CSSColorValue
-    val secondaryColor: CSSColorValue
+    val backgroundColor: CSSColorValue get() = currentTheme.backgroundColor
+    val textColor: CSSColorValue get() = currentTheme.textColor
+    val primaryColor: CSSColorValue get() = currentTheme.primaryColor
+    val secondaryColor: CSSColorValue get() = currentTheme.secondaryColor
 
     val fontWeight: FontWeight get() = FontWeight.Normal
     val fontSize: FontSize get() = FontSize.Medium
