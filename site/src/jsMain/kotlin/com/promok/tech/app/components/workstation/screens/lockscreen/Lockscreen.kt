@@ -56,6 +56,33 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
 
     private val date: Date = Date(dateTheme)
 
+
+    /**
+     * Function to render default lockscreen
+     * @category Private Composable
+     */
+    @Composable
+    private fun defaultScreen() {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding { top(100.px) },
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            clock.render()
+            date.render()
+        }
+
+        Row(
+
+        ) {
+            Forecast.render()
+            Forecast.render()
+            Forecast.render()
+            Forecast.render()
+        }
+    }
+
     @Composable
     override fun render() {
         Box(
@@ -84,22 +111,11 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
                         property("background-color", "rgba(0,0,0,0.4)")
                     }
             ) {
-                if (unlockscreen.isWorkstationUnlocking.value) unlockscreen.render()
-                else Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding { top(100.px) },
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    clock.render()
-                    date.render()
-
-                    Row {
-                        Forecast.render()
-                    }
+                when {
+                    unlockscreen.isWorkstationUnlocking.value -> unlockscreen.render()
+                    else -> defaultScreen()
                 }
             }
         }
-
     }
 }
