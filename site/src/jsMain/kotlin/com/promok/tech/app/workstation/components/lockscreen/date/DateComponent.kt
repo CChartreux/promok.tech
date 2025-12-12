@@ -1,7 +1,7 @@
-package com.promok.tech.app.components.util.date
+package com.promok.tech.app.workstation.components.lockscreen.date
 
 import androidx.compose.runtime.*
-import com.promok.tech.app.components.Components
+import com.promok.tech.app.workstation.components.Components
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
@@ -12,23 +12,25 @@ import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.dom.Text
 import kotlin.js.Date
 
-class Date(val dateTheme: DateTheme) : Components {
-    private fun getDayString(day: Int): String {
-        val dayList = listOf<String>(
-            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-        )
+class DateComponent(val dateTheme: DateTheme) : Components {
+    private val months = arrayOf(
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    )
 
-        return dayList[day - 1]
+    private val days = arrayOf(
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    )
+
+    private fun getDay(day: Int): String = days.getOrElse(day - 1) {
+        throw IllegalArgumentException("Invalid day: $day")
     }
 
-    private fun getMonthString(month: Int): String {
-        val monthList = listOf<String>(
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        )
-
-        return monthList[month - 1]
+    private fun getMonth(month: Int) = months.getOrElse(month - 1) {
+        throw IllegalArgumentException("Invalid month: $month")
     }
+
+    //private fun getDateString()
 
     @Composable
     override fun render() {
@@ -39,14 +41,14 @@ class Date(val dateTheme: DateTheme) : Components {
             while (true) {
                 if (dateTheme.dateFormat.contains(DateFormat.SHOW_ALL)) {
                     dateString =
-                        getDayString(date.getDay()) + ", " + date.getDay()
-                            .toString() + ". " + getMonthString(date.getMonth()) + " " + date.getFullYear().toString()
+                        getDay(date.getDay()) + ", " + date.getDay()
+                            .toString() + ". " + getMonth(date.getMonth()) + " " + date.getFullYear().toString()
                 } else {
                     if (dateTheme.dateFormat.contains(DateFormat.SHOW_DAY_NAME)) dateString =
-                        getDayString(date.getDay()) + ", "
+                        getDay(date.getDay()) + ", "
                     if (dateTheme.dateFormat.contains(DateFormat.SHOW_DAY)) dateString += date.getDay()
                         .toString() + ". "
-                    if (dateTheme.dateFormat.contains(DateFormat.SHOW_MONTH_NAME)) dateString += getMonthString(date.getMonth()) + " "
+                    if (dateTheme.dateFormat.contains(DateFormat.SHOW_MONTH_NAME)) dateString += getMonth(date.getMonth()) + " "
                     else if (dateTheme.dateFormat.contains(DateFormat.SHOW_MONTH)) dateString += date.getMonth()
                         .toString() + " "
                     if (dateTheme.dateFormat.contains(DateFormat.SHOW_YEAR)) dateString += date.getFullYear().toString()

@@ -1,4 +1,4 @@
-package com.promok.tech.app.components
+package com.promok.tech.app.workstation.components
 
 import androidx.compose.runtime.Composable
 

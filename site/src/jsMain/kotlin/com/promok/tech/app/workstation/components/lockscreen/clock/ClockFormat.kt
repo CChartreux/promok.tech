@@ -1,4 +1,4 @@
-package com.promok.tech.app.components.util.clock
+package com.promok.tech.app.workstation.components.lockscreen.clock
 
 enum class ClockFormat(val displayName: String) {
     TWELVE_HOUR("12h"),

@@ -1,7 +1,7 @@
-package com.promok.tech.app.components.util.clock
+package com.promok.tech.app.workstation.components.lockscreen.clock
 
 import androidx.compose.runtime.*
-import com.promok.tech.app.components.Components
+import com.promok.tech.app.workstation.components.Components
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
@@ -12,7 +12,7 @@ import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.dom.Text
 import kotlin.js.Date
 
-class Clock(val clockTheme: ClockTheme) : Components {
+class ClockComponent(val clockTheme: ClockTheme) : Components {
     @Composable
     override fun render() {
         var date by remember { mutableStateOf(Date()) }

@@ -1,4 +1,4 @@
-package com.promok.tech.app.components.util.date
+package com.promok.tech.app.workstation.components.lockscreen.date
 
 enum class DateFormat(val displayName: String) {
     SHOW_ALL("Show all"),
