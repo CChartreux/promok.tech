@@ -21,6 +21,7 @@ import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -75,17 +76,21 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.vh),
+                .padding(top = 10.vh)
+                .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             clock.render()
             date.render()
+
+            Spacer() // Pushes everything below to the bottom
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .justifyContent(JustifyContent.Center)
                     .gap(10.vw)
+                    .padding(bottom = 8.vh),
             ) {
                 ForecastWidgetComponent.render()
                 ForecastWidgetComponent.render()
