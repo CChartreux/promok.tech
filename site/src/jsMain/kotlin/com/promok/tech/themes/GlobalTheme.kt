@@ -1,6 +1,8 @@
 package com.promok.tech.themes
 
 import com.promok.tech.themes.font.FontFamily
+import com.promok.tech.themes.font.helper.Massive
+import com.promok.tech.themes.font.helper.huge
 import com.varabyte.kobweb.compose.css.FontSize
 import com.varabyte.kobweb.compose.css.FontWeight
 import org.jetbrains.compose.web.css.CSSColorValue
@@ -16,10 +18,12 @@ interface GlobalTheme {
     // Primary body text
     val bodyExtraSmall: FontSize get() = FontSize.XSmall    // small notes, metadata
     val bodySmall: FontSize get() = FontSize.Small          // secondary body text
-    val bodyMedium: FontSize get() = FontSize.Medium        // standard body text
+    val regularSize: FontSize get() = FontSize.Medium        // standard body text
     val bodyLarge: FontSize get() = FontSize.Large          // emphasized body text
 
     // Headings / Titles
+    val titleXXLarge: FontSize get() = FontSize.Massive
+    val titleXLarge: FontSize get() = FontSize.huge
     val titleLarge: FontSize get() = FontSize.XXLarge       // section heading
     val titleMedium: FontSize get() = FontSize.XLarge       // subsection heading
     val titleSmall: FontSize get() = FontSize.Large         // minor heading

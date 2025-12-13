@@ -45,8 +45,8 @@ class ClockComponent(val clockTheme: ClockTheme) : Components {
         Column(
             modifier = Modifier
                 .color(clockTheme.textColor)
-                .fontSize(clockTheme.titleMedium)
-                .fontWeight(clockTheme.regularWeight)
+                .fontSize(clockTheme.fontSize)
+                .fontWeight(clockTheme.fontWeight)
                 .fontFamily(clockTheme.fontFamily)
         ) {
             Text(time)

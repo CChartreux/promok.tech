@@ -7,7 +7,7 @@ import com.varabyte.kobweb.compose.css.FontWeight
 import org.jetbrains.compose.web.css.CSSColorValue
 
 data class DateTheme(
-    var fontSize: FontSize = currentTheme.bodyMedium,
+    var fontSize: FontSize = currentTheme.regularSize,
     var fontWeight: FontWeight = currentTheme.regularWeight,
     override var textColor: CSSColorValue = currentTheme.textColor,
     override var fontFamily: String = currentTheme.fontFamily,

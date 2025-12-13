@@ -8,7 +8,7 @@ import com.varabyte.kobweb.compose.css.FontWeight
 import org.jetbrains.compose.web.css.CSSColorValue
 
 object WidgetTheme : GlobalTheme {
-    var fontSize: FontSize = currentTheme.bodyMedium
+    var fontSize: FontSize = currentTheme.regularSize
     var fontWeight: FontWeight = currentTheme.regularWeight
     override var textColor: CSSColorValue = currentTheme.textColor
     override var secondaryTextColor: CSSColorValue = currentTheme.secondaryTextColor.addAlpha(0.9)

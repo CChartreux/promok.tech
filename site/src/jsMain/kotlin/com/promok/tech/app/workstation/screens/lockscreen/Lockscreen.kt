@@ -10,22 +10,20 @@ import com.promok.tech.app.workstation.components.lockscreen.clock.ClockTheme
 import com.promok.tech.app.workstation.components.lockscreen.date.DateComponent
 import com.promok.tech.app.workstation.components.lockscreen.date.DateFormat
 import com.promok.tech.app.workstation.components.lockscreen.date.DateTheme
-import com.promok.tech.app.workstation.components.lockscreen.widgets.ForecastWidgetComponent
-import com.promok.tech.themes.font.FontFamily
-import com.promok.tech.themes.font.helper.Huge
-import com.varabyte.kobweb.compose.css.*
+import com.promok.tech.themes.currentTheme
+import com.varabyte.kobweb.compose.css.BackgroundRepeat
+import com.varabyte.kobweb.compose.css.BackgroundSize
+import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.functions.CSSUrl
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.vh
-import org.jetbrains.compose.web.css.vw
 
 class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech.app.workstation.screens.Screen {
     // Member variables
@@ -38,32 +36,31 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech
     private val unlockscreen: Unlockscreen = Unlockscreen(isWorkstationUnlocked)
 
     // Clock component
-    private val clockTheme: ClockTheme =
+    private val clock = ClockComponent(
         ClockTheme(
-            fontSize = FontSize.Huge,
-            fontFamily = FontFamily.Inter,
-            fontWeight = FontWeight.Bold,
+            fontSize = currentTheme.titleXXLarge,
+            fontFamily = currentTheme.fontFamily,
+            fontWeight = currentTheme.regularWeight,
             clockFormat = setOf(
                 ClockFormat.SHOW_HOURS,
                 ClockFormat.SHOW_MINUTES,
                 ClockFormat.TWELVE_HOUR
             )
         )
-
-    private val clock: ClockComponent =
-        ClockComponent(clockTheme)
-
-
-    private val dateTheme: DateTheme =
-        DateTheme(
-            fontSize = FontSize.XXLarge,
-            fontFamily = FontFamily.Inter,
-            dateFormat = setOf(DateFormat.SHOW_DAY_NAME, DateFormat.SHOW_MONTH_NAME, DateFormat.SHOW_YEAR_ABBREVIATION)
-        )
+    )
 
     private val date: DateComponent =
-        DateComponent(dateTheme)
-
+        DateComponent(
+            DateTheme(
+                fontSize = currentTheme.titleMedium,
+                fontFamily = currentTheme.fontFamily,
+                dateFormat = setOf(
+                    DateFormat.SHOW_DAY_NAME,
+                    DateFormat.SHOW_MONTH_NAME,
+                    DateFormat.SHOW_YEAR_ABBREVIATION
+                )
+            )
+        )
 
     /**
      * Function to render default lockscreen
@@ -80,17 +77,17 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech
             clock.render()
             date.render()
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .justifyContent(JustifyContent.Center)
-                    .gap(10.vw)
-            ) {
-                ForecastWidgetComponent.render()
-                ForecastWidgetComponent.render()
-                ForecastWidgetComponent.render()
-                ForecastWidgetComponent.render()
-            }
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .justifyContent(JustifyContent.Center)
+//                    .gap(10.vw)
+//            ) {
+//                ForecastWidgetComponent.render()
+//                ForecastWidgetComponent.render()
+//                ForecastWidgetComponent.render()
+//                ForecastWidgetComponent.render()
+//            }
 
         }
     }
