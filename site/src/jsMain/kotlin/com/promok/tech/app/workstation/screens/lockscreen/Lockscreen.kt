@@ -10,7 +10,7 @@ import com.promok.tech.app.workstation.components.lockscreen.reusable.clock.Cloc
 import com.promok.tech.app.workstation.components.lockscreen.reusable.date.DateComponent
 import com.promok.tech.app.workstation.components.lockscreen.reusable.date.DateFormat
 import com.promok.tech.app.workstation.components.lockscreen.reusable.date.DateTheme
-import com.promok.tech.app.workstation.components.lockscreen.widgets.ForecastWidgetComponent
+import com.promok.tech.app.workstation.components.lockscreen.widget.forecast.ForecastWidgetComponent
 import com.promok.tech.themes.currentTheme
 import com.varabyte.kobweb.compose.css.BackgroundRepeat
 import com.varabyte.kobweb.compose.css.BackgroundSize
@@ -89,7 +89,7 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech
                 modifier = Modifier
                     .fillMaxWidth()
                     .justifyContent(JustifyContent.Center)
-                    .gap(10.vw)
+                    .gap(1.vw)
                     .padding(bottom = 8.vh),
             ) {
                 ForecastWidgetComponent.render()

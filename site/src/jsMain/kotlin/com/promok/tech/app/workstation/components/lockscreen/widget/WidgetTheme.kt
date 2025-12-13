@@ -1,4 +1,4 @@
-package com.promok.tech.app.workstation.components.lockscreen.widgets
+package com.promok.tech.app.workstation.components.lockscreen.widget
 
 import com.promok.tech.themes.GlobalTheme
 import com.promok.tech.themes.currentTheme
@@ -9,7 +9,11 @@ import org.jetbrains.compose.web.css.CSSColorValue
 
 object WidgetTheme : GlobalTheme {
     var fontSize: FontSize = currentTheme.regularSize
-    var fontWeight: FontWeight = currentTheme.regularWeight
+    var fontWeight: FontWeight = currentTheme.lightWeight
+
+    var subtitleFontSize: FontSize = currentTheme.bodySmall
+    var subtitleFontWeight: FontWeight = currentTheme.regularWeight
+
     override var textColor: CSSColorValue = currentTheme.textColor
     override var secondaryTextColor: CSSColorValue = currentTheme.secondaryTextColor.addAlpha(0.9)
     override var fontFamily: String = currentTheme.fontFamily
