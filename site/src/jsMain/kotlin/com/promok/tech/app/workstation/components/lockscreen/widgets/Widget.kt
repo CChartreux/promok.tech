@@ -1,4 +1,4 @@
-package com.promok.tech.app.components.util.lockscreen.widgets
+package com.promok.tech.app.workstation.components.lockscreen.widgets
 
 import androidx.compose.runtime.Composable
 

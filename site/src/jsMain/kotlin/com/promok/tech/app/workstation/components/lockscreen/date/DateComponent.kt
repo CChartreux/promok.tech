@@ -63,8 +63,8 @@ class DateComponent(val dateTheme: DateTheme) : Components {
         Column(
             modifier = Modifier
                 .color(dateTheme.textColor)
-                .fontSize(dateTheme.fontSize)
-                .fontWeight(dateTheme.fontWeight)
+                .fontSize(dateTheme.bodyLarge)
+                .fontWeight(dateTheme.regularWeight)
                 .fontFamily(dateTheme.fontFamily)
         ) {
             Text(dateString)

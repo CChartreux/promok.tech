@@ -1,7 +1,7 @@
 package com.promok.tech.pages
 
 import androidx.compose.runtime.Composable
-import com.promok.tech.app.components.workstation.Workstation
+import com.promok.tech.app.workstation.Workstation
 import com.varabyte.kobweb.core.Page
 
 @Page

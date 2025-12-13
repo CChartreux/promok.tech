@@ -1,4 +1,4 @@
-package com.promok.tech.app.components.workstation.screens.lockscreen
+package com.promok.tech.app.workstation.screens.lockscreen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -28,7 +28,7 @@ class Unlockscreen(private val isWorkstationUnlocked: MutableState<Boolean>) {
     }
 
     fun lockWorkstation() {
-        _isWorkstationUnlocking.value = false;
+        _isWorkstationUnlocking.value = false
     }
 
     @Composable

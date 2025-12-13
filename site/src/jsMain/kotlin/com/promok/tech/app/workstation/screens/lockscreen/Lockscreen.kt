@@ -1,17 +1,16 @@
-package com.promok.tech.app.components.workstation.screens.lockscreen
+package com.promok.tech.app.workstation.screens.lockscreen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import com.promok.tech.app.components.util.clock.Clock
-import com.promok.tech.app.components.util.clock.ClockFormat
-import com.promok.tech.app.components.util.clock.ClockTheme
-import com.promok.tech.app.components.util.date.Date
-import com.promok.tech.app.components.util.date.DateFormat
-import com.promok.tech.app.components.util.date.DateTheme
-import com.promok.tech.app.components.util.lockscreen.widgets.Forecast
-import com.promok.tech.app.components.workstation.screens.Screen
+import com.promok.tech.app.workstation.components.lockscreen.clock.ClockComponent
+import com.promok.tech.app.workstation.components.lockscreen.clock.ClockFormat
+import com.promok.tech.app.workstation.components.lockscreen.clock.ClockTheme
+import com.promok.tech.app.workstation.components.lockscreen.date.DateComponent
+import com.promok.tech.app.workstation.components.lockscreen.date.DateFormat
+import com.promok.tech.app.workstation.components.lockscreen.date.DateTheme
+import com.promok.tech.app.workstation.components.lockscreen.widgets.ForecastWidgetComponent
 import com.promok.tech.themes.font.FontFamily
 import com.promok.tech.themes.font.helper.Huge
 import com.varabyte.kobweb.compose.css.*
@@ -25,9 +24,10 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.vh
+import org.jetbrains.compose.web.css.vw
 
-class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
+class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech.app.workstation.screens.Screen {
     // Member variables
     private val _backgroundImageUrl: MutableState<CSSUrl> =
         mutableStateOf(url("https://images.unsplash.com/photo-1633379314203-b6e63901273d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI3fHx8ZW58MHx8fHx8"))
@@ -38,23 +38,31 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
     private val unlockscreen: Unlockscreen = Unlockscreen(isWorkstationUnlocked)
 
     // Clock component
-    private val clockTheme: ClockTheme = ClockTheme(
-        fontSize = FontSize.Huge,
-        fontFamily = FontFamily.Inter,
-        fontWeight = FontWeight.Bold,
-        clockFormat = setOf(ClockFormat.SHOW_HOURS, ClockFormat.SHOW_MINUTES, ClockFormat.TWELVE_HOUR)
-    )
+    private val clockTheme: ClockTheme =
+        ClockTheme(
+            fontSize = FontSize.Huge,
+            fontFamily = FontFamily.Inter,
+            fontWeight = FontWeight.Bold,
+            clockFormat = setOf(
+                ClockFormat.SHOW_HOURS,
+                ClockFormat.SHOW_MINUTES,
+                ClockFormat.TWELVE_HOUR
+            )
+        )
 
-    private val clock: Clock = Clock(clockTheme)
+    private val clock: ClockComponent =
+        ClockComponent(clockTheme)
 
 
-    private val dateTheme: DateTheme = DateTheme(
-        fontSize = FontSize.XXLarge,
-        fontFamily = FontFamily.Inter,
-        dateFormat = setOf(DateFormat.SHOW_DAY_NAME, DateFormat.SHOW_MONTH_NAME, DateFormat.SHOW_YEAR_ABBREVIATION)
-    )
+    private val dateTheme: DateTheme =
+        DateTheme(
+            fontSize = FontSize.XXLarge,
+            fontFamily = FontFamily.Inter,
+            dateFormat = setOf(DateFormat.SHOW_DAY_NAME, DateFormat.SHOW_MONTH_NAME, DateFormat.SHOW_YEAR_ABBREVIATION)
+        )
 
-    private val date: Date = Date(dateTheme)
+    private val date: DateComponent =
+        DateComponent(dateTheme)
 
 
     /**
@@ -66,20 +74,24 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : Screen {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding { top(100.px) },
+                .padding(top = 10.vh),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             clock.render()
             date.render()
-        }
 
-        Row(
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .justifyContent(JustifyContent.Center)
+                    .gap(10.vw)
+            ) {
+                ForecastWidgetComponent.render()
+                ForecastWidgetComponent.render()
+                ForecastWidgetComponent.render()
+                ForecastWidgetComponent.render()
+            }
 
-        ) {
-            Forecast.render()
-            Forecast.render()
-            Forecast.render()
-            Forecast.render()
         }
     }
 

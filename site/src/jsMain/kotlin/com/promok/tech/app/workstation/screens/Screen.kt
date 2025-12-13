@@ -1,4 +1,4 @@
-package com.promok.tech.app.components.workstation.screens
+package com.promok.tech.app.workstation.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
