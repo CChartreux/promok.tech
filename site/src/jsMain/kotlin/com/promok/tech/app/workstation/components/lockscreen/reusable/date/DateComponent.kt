@@ -1,4 +1,4 @@
-package com.promok.tech.app.workstation.components.lockscreen.date
+package com.promok.tech.app.workstation.components.lockscreen.reusable.date
 
 import androidx.compose.runtime.*
 import com.promok.tech.app.workstation.components.Components
@@ -26,7 +26,7 @@ class DateComponent(val dateTheme: DateTheme) : Components {
         throw IllegalArgumentException("Invalid day: $day")
     }
 
-    private fun getMonth(month: Int) = months.getOrElse(month - 1) {
+    private fun getMonth(month: Int) = months.getOrElse(month) {
         throw IllegalArgumentException("Invalid month: $month")
     }
 

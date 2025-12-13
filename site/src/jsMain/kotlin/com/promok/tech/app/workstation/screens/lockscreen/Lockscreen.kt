@@ -4,26 +4,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import com.promok.tech.app.workstation.components.lockscreen.clock.ClockComponent
-import com.promok.tech.app.workstation.components.lockscreen.clock.ClockFormat
-import com.promok.tech.app.workstation.components.lockscreen.clock.ClockTheme
-import com.promok.tech.app.workstation.components.lockscreen.date.DateComponent
-import com.promok.tech.app.workstation.components.lockscreen.date.DateFormat
-import com.promok.tech.app.workstation.components.lockscreen.date.DateTheme
+import com.promok.tech.app.workstation.components.lockscreen.reusable.clock.ClockComponent
+import com.promok.tech.app.workstation.components.lockscreen.reusable.clock.ClockFormat
+import com.promok.tech.app.workstation.components.lockscreen.reusable.clock.ClockTheme
+import com.promok.tech.app.workstation.components.lockscreen.reusable.date.DateComponent
+import com.promok.tech.app.workstation.components.lockscreen.reusable.date.DateFormat
+import com.promok.tech.app.workstation.components.lockscreen.reusable.date.DateTheme
+import com.promok.tech.app.workstation.components.lockscreen.widgets.ForecastWidgetComponent
 import com.promok.tech.themes.currentTheme
 import com.varabyte.kobweb.compose.css.BackgroundRepeat
 import com.varabyte.kobweb.compose.css.BackgroundSize
+import com.varabyte.kobweb.compose.css.JustifyContent
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.functions.CSSUrl
 import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.vh
+import org.jetbrains.compose.web.css.vw
 
 class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech.app.workstation.screens.Screen {
     // Member variables
@@ -77,17 +81,17 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech
             clock.render()
             date.render()
 
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .justifyContent(JustifyContent.Center)
-//                    .gap(10.vw)
-//            ) {
-//                ForecastWidgetComponent.render()
-//                ForecastWidgetComponent.render()
-//                ForecastWidgetComponent.render()
-//                ForecastWidgetComponent.render()
-//            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .justifyContent(JustifyContent.Center)
+                    .gap(10.vw)
+            ) {
+                ForecastWidgetComponent.render()
+                ForecastWidgetComponent.render()
+                ForecastWidgetComponent.render()
+                ForecastWidgetComponent.render()
+            }
 
         }
     }
