@@ -11,38 +11,29 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.dom.Text
 
-class ClockComponent(clockTheme: ClockTheme) : Components {
-    private var _clockTheme = run {
-        val newFormats = clockTheme.clockFormat.flatMap { clockFormat ->
-            if (clockFormat == ClockFormat.SHOW_ALL) {
-                setOf(ClockFormat.SHOW_HOURS, ClockFormat.SHOW_MINUTES, ClockFormat.SHOW_SECONDS)
-            } else {
-                listOf(clockFormat)
-            }
-        }.toSet()
-        clockTheme.copy(clockFormat = newFormats)
-    }
-
-    private var clock: Clock = Clock(_clockTheme)
+class ClockComponent(private val clockTheme: ClockTheme) : Components {
+    private var clock: Clock = Clock(this.clockTheme.clockFormat)
 
     @Composable
     override fun render() {
         var time: String by remember { mutableStateOf("") }
 
+        /**
+         * Updates the time every second
+         */
         LaunchedEffect(Unit) {
             while (true) {
                 time = clock.getTime()
-
                 delay(1000L) // wait 1 second
             }
         }
 
         Column(
             modifier = Modifier
-                .color(_clockTheme.textColor)
-                .fontSize(_clockTheme.fontSize)
-                .fontWeight(_clockTheme.fontWeight)
-                .fontFamily(_clockTheme.fontFamily)
+                .color(clockTheme.textColor)
+                .fontSize(clockTheme.fontSize)
+                .fontWeight(clockTheme.fontWeight)
+                .fontFamily(clockTheme.fontFamily)
         ) {
             Text(time)
         }

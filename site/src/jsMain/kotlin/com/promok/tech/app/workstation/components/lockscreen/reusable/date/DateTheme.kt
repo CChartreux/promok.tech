@@ -11,5 +11,5 @@ data class DateTheme(
     var fontWeight: FontWeight = currentTheme.regularWeight,
     override var textColor: CSSColorValue = currentTheme.textColor,
     override var fontFamily: String = currentTheme.fontFamily,
-    var dateFormat: Set<DateFormat> = setOf(DateFormat.SHOW_ALL),
+    var dateFormat: Set<DateFormat> = mutableSetOf(DateFormat.SHOW_ALL),
 ) : GlobalTheme

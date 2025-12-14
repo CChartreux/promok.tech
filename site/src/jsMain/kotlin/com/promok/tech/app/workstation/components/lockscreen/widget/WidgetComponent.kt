@@ -19,14 +19,12 @@ import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Text
 
 class WidgetComponent(
-    val title: String,
-    val seeMoreText: String,
-    val content: @Composable () -> Unit
+    private val title: String,
+    private val seeMoreText: String,
+    private val widgetContent: @Composable () -> Unit
 ) : Components {
-    val widget: Widget = Widget(title, seeMoreText)
-
     @Composable
-    private fun WidgetHeader(title: String) {
+    private fun WidgetHeader() {
         Row(modifier = Modifier.widgetHeader()) {
             Row(modifier = Modifier.gap(0.8.vh)) {
                 Image("/app-icons/lockscreen/widgets/weather.png", width = 20, height = 20)
@@ -37,10 +35,11 @@ class WidgetComponent(
 
             Row(modifier = Modifier.gap(0.3.vh)) {
                 repeat(3) {
-                    Box(modifier = Modifier
-                        .size(5.px)
-                        .borderRadius(50.percent)
-                        .backgroundColor(Colors.White)
+                    Box(
+                        modifier = Modifier
+                            .size(5.px)
+                            .borderRadius(50.percent)
+                            .backgroundColor(Colors.White)
                     )
                 }
             }
@@ -48,27 +47,28 @@ class WidgetComponent(
     }
 
     @Composable
-    private fun WidgetFooter(text: String) {
-        Column(modifier = Modifier
-            .color(WidgetTheme.primaryColor)
-            .fontSize(WidgetTheme.subtitleFontSize)
-            .fontWeight(WidgetTheme.subtitleFontWeight)
-            .fontFamily(WidgetTheme.fontFamily)
-            .fillMaxWidth()
-            .padding(bottom = 1.vh),
-               horizontalAlignment = Alignment.CenterHorizontally
+    private fun WidgetFooter() {
+        Column(
+            modifier = Modifier
+                .color(WidgetTheme.primaryColor)
+                .fontSize(WidgetTheme.subtitleFontSize)
+                .fontWeight(WidgetTheme.subtitleFontWeight)
+                .fontFamily(WidgetTheme.fontFamily)
+                .fillMaxWidth()
+                .padding(bottom = 1.vh),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text)
+            Spacer()
+            Text(seeMoreText)
         }
     }
 
     @Composable
     override fun render() {
         Column(modifier = Modifier.widgetFooter()) {
-            WidgetHeader(title)
-            content()
-            Spacer()
-            WidgetFooter(seeMoreText)
+            WidgetHeader()
+            widgetContent()
+            WidgetFooter()
         }
     }
 }

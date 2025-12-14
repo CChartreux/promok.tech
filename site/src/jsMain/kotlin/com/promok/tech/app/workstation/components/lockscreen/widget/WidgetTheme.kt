@@ -35,8 +35,8 @@ object WidgetTheme : GlobalTheme {
 
     fun Modifier.widgetHeader() =
         this
-            .color(WidgetTheme.textColor)
-            .fontSize(WidgetTheme.fontSize)
-            .fontWeight(WidgetTheme.fontWeight)
-            .fontFamily(WidgetTheme.fontFamily)
+            .color(textColor)
+            .fontSize(fontSize)
+            .fontWeight(fontWeight)
+            .fontFamily(fontFamily)
 }

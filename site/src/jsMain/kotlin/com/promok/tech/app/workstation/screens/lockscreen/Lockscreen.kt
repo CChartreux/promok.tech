@@ -33,7 +33,9 @@ import org.jetbrains.compose.web.css.vw
 class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech.app.workstation.screens.Screen {
     // Member variables
     private val _backgroundImageUrl: MutableState<CSSUrl> =
-        mutableStateOf(url("https://images.unsplash.com/photo-1633379314203-b6e63901273d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI3fHx8ZW58MHx8fHx8"))
+        mutableStateOf(
+            url("https://images.unsplash.com/photo-1633379314203-b6e63901273d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI3fHx8ZW58MHx8fHx8")
+        )
 
     override val backgroundImageUrl: State<CSSUrl> get() = _backgroundImageUrl
 
