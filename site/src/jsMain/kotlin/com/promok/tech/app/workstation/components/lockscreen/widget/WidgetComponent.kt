@@ -2,6 +2,8 @@ package com.promok.tech.app.workstation.components.lockscreen.widget
 
 import androidx.compose.runtime.Composable
 import com.promok.tech.app.workstation.components.Components
+import com.promok.tech.app.workstation.components.lockscreen.widget.WidgetTheme.widgetFooter
+import com.promok.tech.app.workstation.components.lockscreen.widget.WidgetTheme.widgetHeader
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -25,32 +27,20 @@ class WidgetComponent(
 
     @Composable
     private fun WidgetHeader(title: String) {
-        Row(
-            modifier = with(widget) {
-                Modifier
-                    .widgetText()
-            }
-        ) {
-            Row(
-                modifier = Modifier.gap(0.8.vh)
-            ) {
+        Row(modifier = Modifier.widgetHeader()) {
+            Row(modifier = Modifier.gap(0.8.vh)) {
                 Image("/app-icons/lockscreen/widgets/weather.png", width = 20, height = 20)
                 Text(title)
             }
 
             Spacer()
 
-
-            Row(
-                modifier = Modifier
-                    .gap(0.3.vh)
-            ) {
+            Row(modifier = Modifier.gap(0.3.vh)) {
                 repeat(3) {
-                    Box(
-                        modifier = Modifier
-                            .size(5.px)
-                            .borderRadius(50.percent)
-                            .backgroundColor(Colors.White)
+                    Box(modifier = Modifier
+                        .size(5.px)
+                        .borderRadius(50.percent)
+                        .backgroundColor(Colors.White)
                     )
                 }
             }
@@ -59,15 +49,14 @@ class WidgetComponent(
 
     @Composable
     private fun WidgetFooter(text: String) {
-        Column(
-            modifier = Modifier
-                .color(WidgetTheme.primaryColor)
-                .fontSize(WidgetTheme.subtitleFontSize)
-                .fontWeight(WidgetTheme.subtitleFontWeight)
-                .fontFamily(WidgetTheme.fontFamily)
-                .fillMaxWidth()
-                .padding(bottom = 1.vh),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Column(modifier = Modifier
+            .color(WidgetTheme.primaryColor)
+            .fontSize(WidgetTheme.subtitleFontSize)
+            .fontWeight(WidgetTheme.subtitleFontWeight)
+            .fontFamily(WidgetTheme.fontFamily)
+            .fillMaxWidth()
+            .padding(bottom = 1.vh),
+               horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text)
         }
@@ -75,9 +64,7 @@ class WidgetComponent(
 
     @Composable
     override fun render() {
-        Column(modifier = with(widget) {
-            Modifier.widgetContainer()
-        }) {
+        Column(modifier = Modifier.widgetFooter()) {
             WidgetHeader(title)
             content()
             Spacer()
