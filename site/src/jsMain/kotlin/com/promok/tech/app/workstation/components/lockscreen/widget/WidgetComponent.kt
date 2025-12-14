@@ -2,8 +2,7 @@ package com.promok.tech.app.workstation.components.lockscreen.widget
 
 import androidx.compose.runtime.Composable
 import com.promok.tech.app.workstation.components.Components
-import com.promok.tech.app.workstation.components.lockscreen.widget.WidgetTheme.widgetFooter
-import com.promok.tech.app.workstation.components.lockscreen.widget.WidgetTheme.widgetHeader
+import com.promok.tech.app.workstation.components.lockscreen.widget.WidgetTheme.widget
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -12,7 +11,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.silk.components.graphics.Image
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
@@ -25,11 +23,8 @@ class WidgetComponent(
 ) : Components {
     @Composable
     private fun WidgetHeader() {
-        Row(modifier = Modifier.widgetHeader()) {
-            Row(modifier = Modifier.gap(0.8.vh)) {
-                Image("/app-icons/lockscreen/widgets/weather.png", width = 20, height = 20)
-                Text(title)
-            }
+        Row {
+            Text(title)
 
             Spacer()
 
@@ -65,7 +60,7 @@ class WidgetComponent(
 
     @Composable
     override fun render() {
-        Column(modifier = Modifier.widgetFooter()) {
+        Column(modifier = Modifier.widget()) {
             WidgetHeader()
             widgetContent()
             WidgetFooter()
