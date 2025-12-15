@@ -1,30 +1,4 @@
-# promok.tech – My Portfolio Website
-
-Welcome to **promok.tech**, my personal portfolio website and playground for experimenting with modern Kotlin/JS and web
-development.
-
-This project showcases my skills in **Kotlin, Kobweb, Compose for Web, and type-safe CSS styling**, combined with a
-desktop-like web interface and custom UI components.
-
----
-
-## 🌟 Features
-
-- **Dynamic Clock Component**
-    - Displays hours, minutes, and seconds
-    - Supports 12-hour and 24-hour formats
-    - Automatically updates every second
-- **Custom Fonts and Themes**
-    - Fonts: `Doto`, `Inter`, `ADLaM_Display`
-    - Custom font sizes (`Huge`, `Massive`) using type-safe CSS
-- **Desktop-Like UI**
-    - Multiple “windows” rendered on one screen
-    - Responsive design for interactive elements
-- **Type-Safe Styling**
-    - Built-in and custom `FontSize` constants
-    - Kotlin DSL for colors, font weights, and families
-
----
+# rune.promok.tech – Web-Portal for rune-technologies
 
 ## 🛠 Tech Stack
 
