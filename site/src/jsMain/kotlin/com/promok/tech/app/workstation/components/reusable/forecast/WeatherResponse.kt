@@ -1,11 +1,10 @@
-package com.promok.tech.app.workstation.components.lockscreen.reusable.forecast
+package com.promok.tech.app.workstation.components.reusable.forecast
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-data class Weather(
+data class WeatherResponse(
     val latitude: Double,
     val longitude: Double,
     val generationtimeMs: Double? = null,

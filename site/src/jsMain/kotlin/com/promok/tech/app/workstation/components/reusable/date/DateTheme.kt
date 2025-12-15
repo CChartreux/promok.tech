@@ -1,4 +1,4 @@
-package com.promok.tech.app.workstation.components.lockscreen.reusable.date
+package com.promok.tech.app.workstation.components.reusable.date
 
 import com.promok.tech.themes.GlobalTheme
 import com.promok.tech.themes.currentTheme

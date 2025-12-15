@@ -1,4 +1,4 @@
-package com.promok.tech.app.workstation.components.lockscreen.reusable.clock
+package com.promok.tech.app.workstation.components.reusable.clock
 
 import kotlin.js.Date
 

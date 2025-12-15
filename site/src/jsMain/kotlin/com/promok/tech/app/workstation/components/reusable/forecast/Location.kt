@@ -1,4 +1,4 @@
-package com.promok.tech.app.workstation.components.lockscreen.reusable.forecast
+package com.promok.tech.app.workstation.components.reusable.forecast
 
 import kotlinx.serialization.Serializable
 

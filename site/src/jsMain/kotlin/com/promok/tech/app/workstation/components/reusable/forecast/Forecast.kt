@@ -1,4 +1,4 @@
-package com.promok.tech.app.workstation.components.lockscreen.reusable.forecast
+package com.promok.tech.app.workstation.components.reusable.forecast
 
 import kotlinx.browser.window
 import kotlinx.coroutines.await
@@ -16,12 +16,12 @@ class Forecast {
     }
 
     // Get weather for a specific lat/lon
-    suspend fun getWeather(lat: Double, lon: Double): Weather {
+    suspend fun getWeather(lat: Double, lon: Double): WeatherResponse {
         val url =
             "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&current_weather=true"
         val response = window.fetch(url).await()
         val text = response.text().await()
-        return json.decodeFromString<Weather>(text)
+        return json.decodeFromString<WeatherResponse>(text)
     }
 }
 
