@@ -12,7 +12,7 @@ import org.jetbrains.compose.web.css.*
 
 object WidgetTheme : GlobalTheme {
     var fontSize: FontSize = currentTheme.regularSize
-    var fontWeight: FontWeight = currentTheme.lightWeight
+    var fontWeight: FontWeight = currentTheme.mediumWeight
 
     var subtitleFontSize: FontSize = currentTheme.bodySmall
     var subtitleFontWeight: FontWeight = currentTheme.regularWeight
@@ -24,8 +24,6 @@ object WidgetTheme : GlobalTheme {
     fun Modifier.widget() =
         this
             .color(textColor)
-            .fontSize(fontSize)
-            .fontWeight(fontWeight)
             .fontFamily(fontFamily)
 
             .width(15.vw)

@@ -11,6 +11,8 @@ plugins {
     // alias(libs.plugins.kobwebx.markdown)
 }
 
+
+
 group = "com.promok.tech"
 version = "1.0-SNAPSHOT"
 
@@ -21,7 +23,7 @@ kobweb {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
             }
 
-            description.set("Portfolio Website from Peter Promok; Powered by Kobweb")
+            description.set("Portfolio Website from Peter Promok / Homepage for Rune; Powered by Kobweb")
         }
     }
 }

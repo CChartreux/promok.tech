@@ -1,4 +1,4 @@
-package com.promok.tech.app.workstation.components.reusable.forecast
+package com.promok.tech.app.workstation.components.reusable.forecast.api.response
 
 import kotlinx.serialization.Serializable
 

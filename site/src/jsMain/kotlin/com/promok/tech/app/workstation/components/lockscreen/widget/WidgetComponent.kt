@@ -23,10 +23,12 @@ class WidgetComponent(
 ) : Components {
     @Composable
     private fun WidgetHeader() {
-        Row {
+        Row(
+            modifier = Modifier
+                .fontSize(WidgetTheme.fontSize)
+                .fontWeight(WidgetTheme.fontWeight)
+        ) {
             Text(title)
-
-            Spacer()
 
             Row(modifier = Modifier.gap(0.3.vh)) {
                 repeat(3) {
@@ -53,17 +55,22 @@ class WidgetComponent(
                 .padding(bottom = 1.vh),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer()
             Text(seeMoreText)
         }
     }
 
     @Composable
     override fun render() {
-        Column(modifier = Modifier.widget()) {
+        Column(
+            modifier = Modifier.widget(),
+        ) {
             WidgetHeader()
-            widgetContent()
-            WidgetFooter()
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                widgetContent()
+                Spacer()
+                WidgetFooter()
+            }
         }
     }
 }
