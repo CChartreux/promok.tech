@@ -17,26 +17,31 @@ import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Text
 
 class WidgetComponent(
-    private val title: String,
-    private val seeMoreText: String,
-    private val widgetContent: @Composable () -> Unit
+        private val title: String,
+        private val seeMoreText: String,
+        private val widgetContent: @Composable () -> Unit,
 ) : Components {
+
     @Composable
     private fun WidgetHeader() {
         Row(
-            modifier = Modifier
-                .fontSize(WidgetTheme.fontSize)
-                .fontWeight(WidgetTheme.fontWeight)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fontSize(WidgetTheme.fontSize)
+                    .fontWeight(WidgetTheme.fontWeight),
+                verticalAlignment = Alignment.CenterVertically
         ) {
             Text(title)
+
+            Spacer()
 
             Row(modifier = Modifier.gap(0.3.vh)) {
                 repeat(3) {
                     Box(
-                        modifier = Modifier
-                            .size(5.px)
-                            .borderRadius(50.percent)
-                            .backgroundColor(Colors.White)
+                            modifier = Modifier
+                                .size(4.px)
+                                .borderRadius(50.percent)
+                                .backgroundColor(Colors.White)
                     )
                 }
             }
@@ -46,14 +51,14 @@ class WidgetComponent(
     @Composable
     private fun WidgetFooter() {
         Column(
-            modifier = Modifier
-                .color(WidgetTheme.primaryColor)
-                .fontSize(WidgetTheme.subtitleFontSize)
-                .fontWeight(WidgetTheme.subtitleFontWeight)
-                .fontFamily(WidgetTheme.fontFamily)
-                .fillMaxWidth()
-                .padding(bottom = 1.vh),
-            horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier
+                    .color(WidgetTheme.primaryColor)
+                    .fontSize(WidgetTheme.subtitleFontSize)
+                    .fontWeight(WidgetTheme.subtitleFontWeight)
+                    .fontFamily(WidgetTheme.fontFamily)
+                    .fillMaxWidth()
+                    .padding(bottom = 1.vh),
+                horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(seeMoreText)
         }
@@ -62,11 +67,18 @@ class WidgetComponent(
     @Composable
     override fun render() {
         Column(
-            modifier = Modifier.widget(),
+                modifier = Modifier
+                    .widget()
+                    .padding(top = 1.vh, bottom = 1.vh),
         ) {
             WidgetHeader()
 
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 1.vh, bottom = 1.vh),
+                    horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 widgetContent()
                 Spacer()
                 WidgetFooter()
