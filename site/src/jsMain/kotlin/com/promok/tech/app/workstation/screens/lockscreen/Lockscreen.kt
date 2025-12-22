@@ -92,7 +92,7 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech
                     .fillMaxWidth()
                     .justifyContent(JustifyContent.Center)
                     .gap(1.vw)
-                    .padding(bottom = 8.vh),
+                    .padding(bottom = 4.vh),
             ) {
                 ForecastWidgetComponent.render()
                 ForecastWidgetComponent.render()

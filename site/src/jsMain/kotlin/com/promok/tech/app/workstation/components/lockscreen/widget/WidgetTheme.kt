@@ -11,14 +11,15 @@ import com.varabyte.kobweb.compose.ui.styleModifier
 import org.jetbrains.compose.web.css.*
 
 object WidgetTheme : GlobalTheme {
-    var fontSize: FontSize = currentTheme.regularSize
+    var fontSize: FontSize = currentTheme.bodySmall
     var fontWeight: FontWeight = currentTheme.mediumWeight
 
-    var subtitleFontSize: FontSize = currentTheme.bodySmall
+    var subtitleFontSize: FontSize = currentTheme.bodyExtraSmall
     var subtitleFontWeight: FontWeight = currentTheme.regularWeight
 
+    var subtitleFonColor: CSSColorValue = currentTheme.secondaryTextColor.addAlpha(0.5)
+
     override var textColor: CSSColorValue = currentTheme.textColor
-    override var secondaryTextColor: CSSColorValue = currentTheme.secondaryTextColor.addAlpha(0.9)
     override var fontFamily: String = currentTheme.fontFamily
 
     fun Modifier.widget() =
@@ -26,8 +27,8 @@ object WidgetTheme : GlobalTheme {
             .color(textColor)
             .fontFamily(fontFamily)
 
-            .width(15.vw)
-            .height(12.vh)
+            .width(17.vw)
+            .height(13.5.vh)
             .border(2.px, color = rgb(255, 255, 255))
             .styleModifier {
                 property("box-sizing", "border-box")
