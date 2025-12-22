@@ -63,6 +63,7 @@ class Lockscreen(isWorkstationUnlocked: MutableState<Boolean>) : com.promok.tech
                 fontFamily = currentTheme.fontFamily,
                 dateFormat = setOf(
                     DateFormat.SHOW_DAY_NAME,
+                    DateFormat.SHOW_DAY,
                     DateFormat.SHOW_MONTH_NAME,
                     DateFormat.SHOW_YEAR_ABBREVIATION
                 )

@@ -22,18 +22,12 @@ object WidgetTheme : GlobalTheme {
     override var textColor: CSSColorValue = currentTheme.textColor
     override var fontFamily: String = currentTheme.fontFamily
 
-    fun Modifier.widget() =
-        this
-            .color(textColor)
-            .fontFamily(fontFamily)
+    fun Modifier.widget() = this.color(textColor).fontFamily(fontFamily)
 
-            .width(17.vw)
-            .height(13.5.vh)
-            .border(2.px, color = rgb(255, 255, 255))
-            .styleModifier {
-                property("box-sizing", "border-box")
-                property("border-radius", "5px")
-                property("background", "rgba(255,255,255,0.05)")
-                property("backdrop-filter", "blur(30px)")
-            }
+        .width(17.vw).height(13.5.vh).border(2.px, color = rgb(255, 255, 255)).styleModifier {
+            property("box-sizing", "border-box")
+            property("border-radius", "5px")
+            property("background", "rgba(255,255,255,0.05)")
+            property("backdrop-filter", "blur(30px)")
+        }
 }

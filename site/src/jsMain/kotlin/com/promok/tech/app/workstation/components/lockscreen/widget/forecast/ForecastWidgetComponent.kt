@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import com.promok.tech.app.workstation.components.Components
 import com.promok.tech.app.workstation.components.lockscreen.widget.WidgetComponent
+import com.promok.tech.app.workstation.components.lockscreen.widget.forecast.ForecastWidgetComponent.widgetContent
 import com.promok.tech.app.workstation.components.reusable.forecast.api.response.CurrentWeather
 import com.promok.tech.themes.currentTheme
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -17,6 +18,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.silk.components.graphics.Image
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.vh
+import org.jetbrains.compose.web.css.vw
 import org.jetbrains.compose.web.dom.Text
 
 object ForecastWidgetComponent : Components {
@@ -24,41 +26,31 @@ object ForecastWidgetComponent : Components {
 
     @Composable
     fun widgetContent() {
-        val currentWeather = mutableStateOf<CurrentWeather?>(null)
+        var currentWeather = mutableStateOf<CurrentWeather?>(null)
 
         LaunchedEffect(Unit) {
-            ForecastWidget.getWeather(city, currentWeather) // Get current weather
+            currentWeather = ForecastWidget.getWeather(city) // Get current weather
         }
 
-        Row(
-            modifier = Modifier
-                .alignItems(AlignItems.Center)
-        ) {
-            Image(
-                "/app-icons/lockscreen/widgets/forecast/day_clear.svg",
-                width = 55,
-                height = 55,
-                alt = "Sunny day icon"
-            )
+        Row(modifier = Modifier.alignItems(AlignItems.Center)) {
+            Image("/app-icons/lockscreen/widgets/forecast/day_clear.svg", width = 55, height = 55,
+                  alt = "Sunny day icon")
 
-            Row {
-                Box(
-                    modifier = Modifier
-                        .fontSize(currentTheme.titleLarge)
-                        .fontWeight(currentTheme.semiBoldWeight)
-                ) {
+            Row(modifier = Modifier.padding(left = 0.5.vw)) {
+                Box(modifier = Modifier.fontSize(currentTheme.titleLarge).fontWeight(currentTheme.semiBoldWeight)) {
                     Text(currentWeather.value?.temperature.toString())
                 }
 
-                Box(
-                    modifier = Modifier
-                        .fontSize(currentTheme.bodySmall)
-                        .fontWeight(currentTheme.regularWeight)
-
-                        .padding(top = 0.2.vh)
-                ) {
+                Box(modifier = Modifier.fontSize(currentTheme.bodySmall).fontWeight(currentTheme.regularWeight)
+                    .padding(top = 0.2.vh)) {
                     Text("°C")
                 }
+
+//                Box {
+//                    val string = "Sunny"
+//
+//                    Text(string)
+//                }
             }
         }
     }

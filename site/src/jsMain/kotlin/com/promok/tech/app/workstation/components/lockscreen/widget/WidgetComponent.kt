@@ -14,7 +14,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
-import org.jetbrains.compose.web.dom.Col
 import org.jetbrains.compose.web.dom.Text
 
 class WidgetComponent(
@@ -24,25 +23,15 @@ class WidgetComponent(
 ) : Components {
     @Composable
     private fun WidgetHeader() {
-        Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fontSize(WidgetTheme.fontSize)
-                    .fontWeight(WidgetTheme.fontWeight),
-                verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(modifier = Modifier.fillMaxWidth().fontSize(WidgetTheme.fontSize).fontWeight(WidgetTheme.fontWeight),
+            verticalAlignment = Alignment.CenterVertically) {
             Text(title)
 
             Spacer()
 
             Row(modifier = Modifier.gap(0.3.vh)) {
                 repeat(3) {
-                    Box(
-                            modifier = Modifier
-                                .size(4.px)
-                                .borderRadius(50.percent)
-                                .backgroundColor(Colors.White)
-                    )
+                    Box(modifier = Modifier.size(4.px).borderRadius(50.percent).backgroundColor(Colors.White))
                 }
             }
         }
@@ -50,42 +39,24 @@ class WidgetComponent(
 
     @Composable
     private fun WidgetFooter() {
-        Column(
-                modifier = Modifier
-                    .color(WidgetTheme.subtitleFonColor)
-                    .fontSize(WidgetTheme.subtitleFontSize)
-                    .fontWeight(WidgetTheme.subtitleFontWeight)
-                    .fontFamily(WidgetTheme.fontFamily)
-                    .fillMaxWidth()
-                    .padding(bottom = 2.vh),
-                horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column(modifier = Modifier.color(WidgetTheme.subtitleFonColor).fontSize(WidgetTheme.subtitleFontSize)
+            .fontWeight(WidgetTheme.subtitleFontWeight).fontFamily(WidgetTheme.fontFamily).fillMaxWidth()
+            .padding(bottom = 2.vh), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(seeMoreText)
         }
     }
 
     @Composable
     override fun render() {
-        Column(
-                modifier = Modifier
-                    .widget()
-                    .padding(top = 1.vh, left = 1.vh, right = 1.vh)
-        ) {
+        Column(modifier = Modifier.widget().padding(top = 1.vh, left = 1.vh, right = 1.vh)) {
             WidgetHeader()
 
-            Box(
-                    modifier = Modifier
-                        .padding(top = 1.vh)
-            ) {
+            Box(modifier = Modifier.padding(top = 1.vh)) {
                 widgetContent()
             }
 
-            Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 1.vh, bottom = 1.vh),
-                    horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            Column(modifier = Modifier.fillMaxWidth().padding(top = 1.vh, bottom = 1.vh),
+                   horizontalAlignment = Alignment.CenterHorizontally) {
                 Spacer()
                 WidgetFooter()
             }
